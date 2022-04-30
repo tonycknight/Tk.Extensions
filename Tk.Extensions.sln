@@ -20,6 +20,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{60BBCDF1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tk.Extensions.Tests", "test\Tk.Extensions.Tests\Tk.Extensions.Tests.csproj", "{573CA709-800B-44BF-9B1F-320B168262A3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gha", "gha", "{B7B79038-7C09-4922-B745-86DCF74A2F5D}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\workflows\clean-builds.yaml = .github\workflows\clean-builds.yaml
+		.github\workflows\codeql-analysis.yml = .github\workflows\codeql-analysis.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +48,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{32458E1B-D7C3-4F04-BA5E-8AF7A521C46C} = {EEFEF393-BB4B-43DD-B84D-DAA44F7DEC47}
 		{573CA709-800B-44BF-9B1F-320B168262A3} = {922CD308-88E8-4A66-9B4D-77598A27C904}
+		{B7B79038-7C09-4922-B745-86DCF74A2F5D} = {60BBCDF1-4E63-4796-A2EF-C703DA244EF1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {520013B2-8781-4704-BDEE-302E70B728F6}
