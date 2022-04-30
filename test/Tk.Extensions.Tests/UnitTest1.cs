@@ -7,7 +7,7 @@ namespace Tk.Extensions.Tests
         [Fact]
         public void Test1()
         {
-            var c = new Tk.Extensions.Class1();
+            
 
         }
     }
