@@ -1,8 +1,9 @@
 ﻿using System;
 using FluentAssertions;
+using Tk.Extensions.Time;
 using Xunit;
 
-namespace Tk.Extensions.Tests
+namespace Tk.Extensions.Tests.Time
 {
     public class TimeProviderTests
     {
@@ -23,7 +24,7 @@ namespace Tk.Extensions.Tests
             var tp = new TimeProvider();
 
             var r = tp.UtcNow();
-                        
+
             r.Should().BeCloseTo(now, TimeSpan.FromSeconds(1));
         }
 

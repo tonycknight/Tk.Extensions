@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
-namespace Tk.Extensions
+namespace Tk.Extensions.Time
 {
     public static class DateTimeExtensions
     {
@@ -10,7 +10,7 @@ namespace Tk.Extensions
 
         [DebuggerStepThrough]
         public static DateTime ToUkDateTime(this DateTime value)
-            => System.TimeZoneInfo.ConvertTimeFromUtc(value, _ukTimeZone);
+            => TimeZoneInfo.ConvertTimeFromUtc(value, _ukTimeZone);
 
 
         [ExcludeFromCodeCoverage]

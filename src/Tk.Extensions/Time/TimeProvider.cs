@@ -1,4 +1,4 @@
-﻿namespace Tk.Extensions
+﻿namespace Tk.Extensions.Time
 {
     public interface ITimeProvider
     {
