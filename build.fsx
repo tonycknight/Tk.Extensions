@@ -153,13 +153,12 @@ Target.create "Consolidate code coverage" (fun _ ->
     if not result.OK then failwithf "reportgenerator failed!"  
 )
 
-Target.create "PublishRuntime-ubuntu-x64" (fun _ -> publishAndCopy "ubuntu-x64")
-
 Target.create "All" ignore
 
 "Clean"
   ==> "Restore"
   ==> "Build"
+  ==> "Pack"
   ==> "Unit Tests"
   ==> "Consolidate code coverage"
   ==> "Run Stryker"
