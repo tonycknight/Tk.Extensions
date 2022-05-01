@@ -9,6 +9,7 @@ namespace Tk.Extensions.Tests
     {
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS8604 // Possible null reference argument.
+
         [Fact]
         public void Join_Null_ThrowsException()
         {
@@ -64,6 +65,7 @@ namespace Tk.Extensions.Tests
             
             r.Should().Be(expected);
         }
+
 #pragma warning restore CS8604 // Possible null reference argument.
 #pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
     }

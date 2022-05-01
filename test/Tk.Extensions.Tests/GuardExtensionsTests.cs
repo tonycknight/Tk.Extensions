@@ -12,13 +12,9 @@ namespace Tk.Extensions.Tests
         [Fact]
         public void ArgNotNull_Null_ThrowsException()
         {
-
             string s = null;
 
-
-
             Action a = () => s.ArgNotNull(nameof(s));
-
 
             a.Should().Throw<ArgumentNullException>().WithParameterName(nameof(s));
         }
@@ -47,7 +43,6 @@ namespace Tk.Extensions.Tests
         {
             Action a = () => 1.InvalidOpArg(null, "invalid");
 
-
             a.Should().Throw<ArgumentNullException>().WithMessage("?*");
         }
 
@@ -58,7 +53,6 @@ namespace Tk.Extensions.Tests
             var r = value.InvalidOpArg(x => false, "invalid");
 
             r.Should().Be(value);
-
         }
 
 #pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
