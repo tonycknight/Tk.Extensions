@@ -72,8 +72,8 @@ jobs:
         with:
           path: ${{ github.workspace }}/test/Tk.Extensions.Tests/TestResults/coverage.info
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          minimum_coverage: 70
-          fail_below_threshold: false
+          minimum_coverage: 90
+          fail_below_threshold: true
           show_line: true
           show_branch: true
           show_missing: true
