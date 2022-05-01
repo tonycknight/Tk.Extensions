@@ -51,11 +51,11 @@ jobs:
           name: codecoverage
           path: ./publish/codecoverage/*.*
 
-      - name: Archive tool nupkg
-        uses: actions/upload-artifact@v2
-        with:
-          name: Tk.Extensions.nupkg
-          path: ./package/Tk.Extensions*.nupkg
+      #- name: Archive tool nupkg
+      #  uses: actions/upload-artifact@v2
+      #  with:
+      #    name: Tk.Extensions.nupkg
+      #    path: ./package/Tk.Extensions*.nupkg
           
       - name: Unit test results
         uses: dorny/test-reporter@v1
@@ -72,7 +72,7 @@ jobs:
         with:
           path: ${{ github.workspace }}/test/Tk.Extensions.Tests/TestResults/coverage.info
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          minimum_coverage: 0
+          minimum_coverage: 70
           fail_below_threshold: false
           show_line: true
           show_branch: true
