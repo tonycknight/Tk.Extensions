@@ -62,5 +62,33 @@ namespace Tk.Extensions.Tests
             
             r.Should().Be(expected);
         }
+
+        [Theory]
+        [InlineData("", "")]
+        [InlineData(" ", "")]
+        [InlineData("asdf", "%s")]
+        public void Format_ValueFormatted(string value, string format)
+        {
+            var r = value.Format(format);
+
+            r.Should().Be(string.Format(format, value));
+        }
+
+        [Theory]
+        [InlineData("", "", "")]
+        [InlineData("a", "", "a")]
+        [InlineData("a", "a", "")]
+        [InlineData("a", "z", "a")]
+        [InlineData("az", "z", "a")]
+        [InlineData("az ", "z", "az ")]
+        [InlineData("az ", "z ", "a")]
+        [InlineData("az ", " ", "az")]
+        [InlineData(" az ", " ", " az")]
+        public void TrimEnd_ResultIsTrimmed(string value, string end, string expected)
+        {
+            var r = value.TrimEnd(end);
+
+            r.Should().Be(expected);
+        }
     }
 }
