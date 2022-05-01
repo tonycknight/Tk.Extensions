@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using FluentAssertions;
 using Xunit;
 
@@ -8,10 +7,6 @@ namespace Tk.Extensions.Tests
 {
     public class DictionaryExtensionsTests
     {
-        // guards for null values/key
-        // key exists
-        // key does not exist
-
         [Fact]
         public void GetOrDefault_NullValues_ExceptionThrown()
         {
@@ -54,10 +49,6 @@ namespace Tk.Extensions.Tests
             {
                 r.Should().Be(default(String));
             }
-            
-        
         }
-        
-
     }
 }
