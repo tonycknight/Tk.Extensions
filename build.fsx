@@ -28,14 +28,19 @@ let ghVersionNumber = (match Fake.BuildServer.GitHubActions.Environment.CI false
 
 let commitSha = Fake.BuildServer.GitHubActions.Environment.Sha
 
+let versionSuffix = match Fake.BuildServer.GitHubActions.Environment.Ref with
+                    | null 
+                    | "refs/heads/main" ->  ""
+                    | _ ->                  "-preview"
+
 let version =  (match ghVersionNumber with
-                | Some vsn -> vsn
+                | Some vsn -> sprintf "%s%s" vsn versionSuffix
                 | None -> "0.0.0"
                 )
 
 let infoVersion = match commitSha with
-                    | null -> sprintf "%s alpha" version
-                    | sha -> sprintf "%s.%s alpha" version sha                    
+                    | null -> sprintf "%s" version
+                    | sha -> sprintf "%s.%s" version sha                    
 
 let assemblyInfoParams (buildParams)=
     [ ("Version", version); ("AssemblyInformationalVersion", infoVersion) ] |> List.append buildParams
