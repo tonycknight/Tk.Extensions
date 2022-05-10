@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Tk.Extensions
+namespace Tk.Extensions.Guards
 {
     public static class GuardExtensions
     {

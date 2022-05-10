@@ -1,8 +1,9 @@
 ﻿using System;
 using FluentAssertions;
+using Tk.Extensions.Guards;
 using Xunit;
 
-namespace Tk.Extensions.Tests
+namespace Tk.Extensions.Tests.Guards
 {
     public class GuardExtensionsTests
     {
@@ -19,7 +20,7 @@ namespace Tk.Extensions.Tests
         [Fact]
         public void ArgNotNull_NotNull_ReturnsValue()
         {
-            string s = "abc";
+            var s = "abc";
             var r = s.ArgNotNull(nameof(s));
 
             r.Should().Be(s);

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Tk.Extensions
+namespace Tk.Extensions.Linq
 {
     public static class EnumerableExtensions
     {

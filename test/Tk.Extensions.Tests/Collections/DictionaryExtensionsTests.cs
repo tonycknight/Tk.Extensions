@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentAssertions;
+using Tk.Extensions.Collections;
 using Xunit;
 
-namespace Tk.Extensions.Tests
+namespace Tk.Extensions.Tests.Collections
 {
     public class DictionaryExtensionsTests
     {
@@ -20,7 +21,7 @@ namespace Tk.Extensions.Tests
         [Fact]
         public void GetOrDefault_NullKey_ExceptionThrown()
         {
-            Dictionary<string, string> d = new Dictionary<string, string>();
+            var d = new Dictionary<string, string>();
 
             Action a = () => d.GetOrDefault(null);
 
@@ -41,13 +42,13 @@ namespace Tk.Extensions.Tests
 
             var r = d.GetOrDefault(testKey);
 
-            if (key == testKey) 
+            if (key == testKey)
             {
                 r.Should().Be(keyValue);
             }
             else
             {
-                r.Should().Be(default(String));
+                r.Should().Be(default);
             }
         }
     }

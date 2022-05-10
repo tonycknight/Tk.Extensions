@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
+using Tk.Extensions.Guards;
 
-namespace Tk.Extensions
+namespace Tk.Extensions.Funcs
 {
     public static class PipeExtensions
     {

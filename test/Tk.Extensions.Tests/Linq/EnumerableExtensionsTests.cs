@@ -1,7 +1,8 @@
 ﻿using FluentAssertions;
+using Tk.Extensions.Linq;
 using Xunit;
 
-namespace Tk.Extensions.Tests
+namespace Tk.Extensions.Tests.Linq
 {
     public class EnumerableExtensionsTests
     {
@@ -18,7 +19,7 @@ namespace Tk.Extensions.Tests
         [Fact]
         public void NullToEmpty_Empty_ReturnsEmpty()
         {
-            string[] xs = new string[0];
+            var xs = new string[0];
 
             var r = xs.NullToEmpty();
 
@@ -28,7 +29,7 @@ namespace Tk.Extensions.Tests
         [Fact]
         public void NullToEmpty_NonEmpty_ReturnsSame()
         {
-            string[] xs = new[] { "1" };
+            var xs = new[] { "1" };
 
             var r = xs.NullToEmpty();
 
