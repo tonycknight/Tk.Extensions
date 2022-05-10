@@ -1,8 +1,9 @@
 ﻿using System;
 using FluentAssertions;
+using Tk.Extensions.Funcs;
 using Xunit;
 
-namespace Tk.Extensions.Tests
+namespace Tk.Extensions.Tests.Funcs
 {
     public class PipeExtensionsTests
     {
@@ -31,7 +32,7 @@ namespace Tk.Extensions.Tests
         [InlineData(2, "4")]
         public void Pipe_ValueIsPipedThroughComposition(int x, string expected)
         {
-            var r  = x.Pipe(i => i * 2)
+            var r = x.Pipe(i => i * 2)
                       .Pipe(i => i.ToString());
 
             r.Should().Be(expected);

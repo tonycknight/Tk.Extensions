@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
+using Tk.Extensions.Guards;
 
-namespace Tk.Extensions
+namespace Tk.Extensions.Collections
 {
     public static class DictionaryExtensions
     {
@@ -16,7 +17,7 @@ namespace Tk.Extensions
             {
                 return value;
             }
-            return default(TValue);
+            return default;
         }
     }
 }
