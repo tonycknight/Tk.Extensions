@@ -25,5 +25,39 @@ namespace Tk.Extensions.Linq
         {
             yield return value;
         }
+
+        /// <summary>
+        /// Flattens a hierarchy into a single sequence
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="values"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> SelectFlat<T>(this IEnumerable<T> values, Func<T, IEnumerable<T>> selector) 
+            => Flatten(values, selector);
+
+
+        private static IEnumerable<T> Flatten<T>(IEnumerable<T> values, Func<T, IEnumerable<T>> selector)
+        {
+            var stack = new Stack<T>();
+
+            foreach (var val in values)
+            {
+                stack.Push(val);
+                yield return val;
+            }
+
+            while (stack.Count > 0)
+            {
+                var val = stack.Pop();
+
+                foreach (var newValue in selector(val))
+                {
+                    yield return newValue;
+
+                    stack.Push(newValue);
+                }
+            }
+        }
     }
 }
