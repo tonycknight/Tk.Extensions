@@ -22,7 +22,7 @@ namespace Tk.Extensions.Tests.Reflection
         {
             var attrs = (new Tk.Extensions.Time.TimeProvider()).GetAssemblyCustomAttributes().ToList();
 
-            var val = attrs.GetAttributeValue<System.Reflection.AssemblyProductAttribute>(a => a.Product);
+            var val = attrs.GetAttributeValue<System.Reflection.AssemblyProductAttribute, string>(a => a.Product);
 
             val.Should().NotBeNullOrWhiteSpace();
         }
@@ -33,7 +33,7 @@ namespace Tk.Extensions.Tests.Reflection
             var attrs = (new Tk.Extensions.Time.TimeProvider()).GetAssemblyCustomAttributes().ToList();
 
 #pragma warning disable CS8603 // Possible null reference return.
-            var val = attrs.GetAttributeValue<Newtonsoft.Json.JsonPropertyAttribute>(a => a.PropertyName);
+            var val = attrs.GetAttributeValue<Newtonsoft.Json.JsonPropertyAttribute, string>(a => a.PropertyName);
 #pragma warning restore CS8603 // Possible null reference return.
 
             val.Should().BeNull();
