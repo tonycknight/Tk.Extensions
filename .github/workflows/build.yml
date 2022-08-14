@@ -58,7 +58,7 @@ jobs:
         with:
           name: stryker.results
           path: |
-            ./StrykerOutput/**
+            ./StrykerOutput/**/reports/*
 
       - name: Archive Code coverage
         uses: actions/upload-artifact@v2
