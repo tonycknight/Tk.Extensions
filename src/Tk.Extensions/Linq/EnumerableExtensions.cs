@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Tk.Extensions.Guards;
 
 namespace Tk.Extensions.Linq
 {
@@ -34,7 +35,8 @@ namespace Tk.Extensions.Linq
         /// <param name="selector"></param>
         /// <returns></returns>
         public static IEnumerable<T> SelectFlat<T>(this IEnumerable<T> values, Func<T, IEnumerable<T>> selector) 
-            => Flatten(values, selector);
+            => Flatten(values.ArgNotNull(nameof(values)), 
+                       selector.ArgNotNull(nameof(selector)));
 
 
         private static IEnumerable<T> Flatten<T>(IEnumerable<T> values, Func<T, IEnumerable<T>> selector)
