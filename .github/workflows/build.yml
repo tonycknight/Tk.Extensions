@@ -140,7 +140,7 @@ jobs:
         run: dotnet nuget push "artifacts/*.nupkg"  --api-key ${{ secrets.NUGET_PAT }} --source "nuget.org"
 
   create-gh-release:
-    name: Create GH release
+    name: create gh release
     runs-on: ubuntu-latest
     needs: [ release-to-nuget ]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
