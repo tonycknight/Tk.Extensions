@@ -3,7 +3,7 @@ name: Clean artifacts
 on:
   workflow_dispatch:
   schedule:
-    - cron: '16 2 * * 4'
+    - cron: '1 1 * * 1'
 
 jobs:
   clean:
