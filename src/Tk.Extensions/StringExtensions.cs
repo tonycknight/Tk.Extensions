@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Tk.Extensions.Guards;
 
 namespace Tk.Extensions
 {
@@ -39,6 +40,13 @@ namespace Tk.Extensions
             return value;
         }
 
+        /// <summary>
+        /// Produce a string of repeated sets of characters
+        /// </summary>
+        /// <param name="chars">The characters to repeat</param>
+        /// <param name="len">The result string's maximum length</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public static string Repeat(this string chars, int len)
         {
             if (string.IsNullOrEmpty(chars)) throw new ArgumentException();
@@ -53,8 +61,17 @@ namespace Tk.Extensions
             return new string(result);
         }
 
+        /// <summary>
+        /// Calculate the Levenshtein edit distance of two strings
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="comparand"></param>
+        /// <returns></returns>
         public static int LevenshteinDistance(this string value, string comparand)
         {
+            value.ArgNotNull(nameof(value));
+            comparand.ArgNotNull(nameof(comparand));
+
             if (value.Length == 0) return comparand.Length;
             if (comparand.Length == 0) return value.Length;
 
