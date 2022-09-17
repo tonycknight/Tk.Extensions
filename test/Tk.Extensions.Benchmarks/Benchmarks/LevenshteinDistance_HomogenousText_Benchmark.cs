@@ -1,5 +1,4 @@
 ﻿using BenchmarkDotNet.Attributes;
-using Tk.Extensions.Search;
 
 namespace Tk.Extensions.Benchmarks.Benchmarks
 {
