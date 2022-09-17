@@ -38,5 +38,19 @@ namespace Tk.Extensions
             }
             return value;
         }
+
+        public static string Repeat(this string chars, int len)
+        {
+            if (string.IsNullOrEmpty(chars)) throw new ArgumentException();
+
+            var result = new char[len];
+            for (var x = 0; x < len; x++)
+            {
+                var i = x % chars.Length;
+                result[x] = chars[i];
+            }
+
+            return new string(result);
+        }
     }
 }

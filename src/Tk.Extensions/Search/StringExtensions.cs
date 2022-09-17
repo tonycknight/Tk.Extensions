@@ -1,14 +1,8 @@
 ﻿namespace Tk.Extensions.Search
 {
     public static class StringExtensions
-    {
-        public static int LevenshteinDistance(this string value, string comparand, StringComparer comparer)
-            => value.NaiveLevenshteinDistance(comparand, comparer);
-
+    {        
         public static int LevenshteinDistance(this string value, string comparand)
-            => value.NaiveLevenshteinDistance(comparand, StringComparer.InvariantCulture);
-
-        private static int NaiveLevenshteinDistance(this string value, string comparand, StringComparer comparer)
         {
             if (value.Length == 0) return comparand.Length;
             if (comparand.Length == 0) return value.Length;
@@ -24,8 +18,7 @@
             {
                 for (var i = 1; i <= value.Length; i++)
                 {                    
-                    var equal = comparer.Equals(valueSpan[i - 1], comparandSpan[j - 1]);
-                    
+                    var equal = valueSpan[i - 1] == comparandSpan[j - 1];
                     var cost = equal ? 0 : 1;
 
                     distance[i, j] = Math.Min(distance[i - 1, j] + 1, 

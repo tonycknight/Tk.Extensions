@@ -90,5 +90,19 @@ namespace Tk.Extensions.Tests
 
             r.Should().Be(expected);
         }
+
+        [Theory]
+        [InlineData("a", 3, "aaa")]
+        [InlineData("ab", 1, "a")]
+        [InlineData("ab", 2, "ab")]
+        [InlineData("ab", 3, "aba")]
+        [InlineData("ab", 4, "abab")]
+        [InlineData("abc", 4, "abca")]
+        public void Repeat_ResultIsRepeatedInputs(string value, int len, string expected)
+        {
+            var result = value.Repeat(len);
+
+            result.Should().Be(expected);
+        }
     }
 }
