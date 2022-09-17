@@ -19,6 +19,7 @@ open Fake.SystemHelper
 let packageDir = "./package"
 let publishDir = "./publish"
 let strykerDir = "./StrykerOutput"
+let benchmarksDir = "./BenchmarkDotNet.Artifacts"
 let mainSolution = "./Tk.Extensions.sln"
 
 
@@ -124,6 +125,9 @@ Target.create "Clean" (fun _ ->
 
     !! strykerDir
     |> Shell.cleanDirs
+
+    !! benchmarksDir
+    |> Shell.cleanDirs
 )
 
 Target.create "Restore" (fun _ ->
@@ -158,6 +162,14 @@ Target.create "Consolidate code coverage" (fun _ ->
     if not result.OK then failwithf "reportgenerator failed!"  
 )
 
+Target.create "Benchmarks" (fun _ ->
+    let args = "-f * "
+    let result = DotNet.exec id "test/Tk.Extensions.Benchmarks/bin/Release/net6.0/Tk.Extensions.Benchmarks.dll" args
+    
+    if not result.OK then failwithf "Benchmarks failed!"
+                            
+)
+
 Target.create "All" ignore
 
 "Clean"
@@ -172,12 +184,20 @@ Target.create "All" ignore
   ==> "Restore"
   ==> "Build"
   ==> "Stryker"
-  
+ 
 
 "Stryker"
-==> "All"
+  ==> "All"
+
+"Clean"
+  ==> "Restore"
+  ==> "Build"
+  ==> "Benchmarks"
+
+"Benchmarks"
+  ==> "All"
 
 "Consolidate code coverage"
-==> "All"
+  ==> "All"
 
 Target.runOrDefault "All"

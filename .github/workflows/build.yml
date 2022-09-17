@@ -133,6 +133,31 @@ jobs:
           name: stryker.results
           path: |
             ./StrykerOutput/**/reports/* 
+
+  benchmarks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1.9.0
+        with:
+          dotnet-version: "6.0.x"
+        
+      - name: dotnet tool restore
+        run: dotnet tool restore
+              
+      - name: Run build
+        run: dotnet fake run "build.fsx" -t "Benchmarks"
+
+      - name: Archive Benchmark results
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: stryker.results
+          path: |
+            ./BenchmarkDotNet.Artifacts/**/results/*.html
     
   release-to-nuget:
     name: release to nuget
