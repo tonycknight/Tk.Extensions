@@ -163,10 +163,10 @@ Target.create "All" ignore
 "Clean"
   ==> "Restore"
   ==> "Build"
-  ==> "Pack"
   ==> "Unit Tests"
   ==> "Consolidate code coverage"
   ==> "Run Stryker"
+  ==> "Pack"
   ==> "All"
 
 Target.runOrDefault "All"
