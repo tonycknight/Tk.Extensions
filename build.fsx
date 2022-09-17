@@ -143,7 +143,7 @@ Target.create "Unit Tests" (fun _ ->
     |> Seq.iter (DotNet.test testOptions)    
 )
 
-Target.create "Run Stryker" (fun _ ->
+Target.create "Stryker" (fun _ ->
     !! "test/**/*.Tests.csproj"
     |> Seq.iter (fun p ->   let args = sprintf "-tp %s -b 90" p
                             let result = DotNet.exec id "dotnet-stryker" args
@@ -163,10 +163,21 @@ Target.create "All" ignore
 "Clean"
   ==> "Restore"
   ==> "Build"
+  ==> "Pack"
   ==> "Unit Tests"
   ==> "Consolidate code coverage"
-  ==> "Run Stryker"
-  ==> "Pack"
-  ==> "All"
+  
+
+"Clean"
+  ==> "Restore"
+  ==> "Build"
+  ==> "Stryker"
+  
+
+"Stryker"
+==> "All"
+
+"Consolidate code coverage"
+==> "All"
 
 Target.runOrDefault "All"
