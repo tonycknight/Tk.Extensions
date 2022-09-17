@@ -32,7 +32,8 @@ namespace Tk.Extensions
         [DebuggerStepThrough]
         public static string TrimEnd(this string value, string trailing)
         {
-            if (value.EndsWith(trailing))
+            if (value.ArgNotNull(nameof(value))
+                     .EndsWith(trailing))
             {
                 var i = value.LastIndexOf(trailing);
                 return value.Substring(0, i);
