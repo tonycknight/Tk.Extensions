@@ -139,7 +139,7 @@ Target.create "Build" (fun _ ->
 Target.create "Pack" (fun _ -> publishProjects |> Seq.iter (DotNet.pack packOptions ) )
 
 Target.create "Unit Tests" (fun _ ->
-    !! "test/**/*.csproj"
+    !! "test/**/*.Tests.csproj"
     |> Seq.iter (DotNet.test testOptions)    
 )
 

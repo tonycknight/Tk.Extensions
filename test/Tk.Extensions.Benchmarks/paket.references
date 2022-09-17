@@ -7,3 +7,4 @@ FluentAssertions
 NSubstitute
 FsCheck.Xunit
 BenchmarkDotNet
+System.Net.Http
