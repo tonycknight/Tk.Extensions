@@ -90,5 +90,59 @@ namespace Tk.Extensions.Tests
 
             r.Should().Be(expected);
         }
+
+        [Theory]
+        [InlineData("a", 3, "aaa")]
+        [InlineData("ab", 1, "a")]
+        [InlineData("ab", 2, "ab")]
+        [InlineData("ab", 3, "aba")]
+        [InlineData("ab", 4, "abab")]
+        [InlineData("abc", 4, "abca")]
+        public void Repeat_ResultIsRepeatedInputs(string value, int len, string expected)
+        {
+            var result = value.Repeat(len);
+
+            result.Should().Be(expected);
+        }
+
+        [Theory]
+        [InlineData("", "aaaa", 4)]
+        [InlineData("aaa", "", 3)]
+        [InlineData("", "", 0)]
+        [InlineData("a", "a", 0)]
+        [InlineData("a", "b", 1)]
+        [InlineData("sitten", "kitten", 1)]
+        [InlineData("sittin", "kitten", 2)]
+        [InlineData("sitten", "kittin", 2)]
+        [InlineData("sit", "kittens", 5)]
+        [InlineData("kittens", "sit", 5)]
+        [InlineData("king's", "kings", 1)]
+        [InlineData("king's cross st pancras", "pancras", 16)]
+        public void GetLevenshteinDistance_Calculated(string value, string comparand, int expected)
+        {
+            var r = value.GetLevenshteinDistance(comparand);
+
+            r.Should().Be(expected);
+        }
+
+        [Theory]
+        [InlineData("", "aaaa", 4)]
+        [InlineData("aaa", "", 3)]
+        [InlineData("", "", 0)]
+        [InlineData("a", "A", 0)]
+        [InlineData("a", "B", 1)]
+        [InlineData("sitten", "kITTEN", 1)]
+        [InlineData("sittin", "kITTen", 2)]
+        [InlineData("sitten", "KITTIN", 2)]
+        [InlineData("sit", "KITTENS", 5)]
+        [InlineData("kittens", "SIT", 5)]
+        [InlineData("king's", "KINGS", 1)]
+        [InlineData("king's cross st pancras", "PANCRAS", 16)]
+        public void GetLevenshteinDistance_IgnoreCase_Calculated(string value, string comparand, int expected)
+        {
+            var r = value.GetLevenshteinDistance(comparand, StringComparer.InvariantCultureIgnoreCase);
+
+            r.Should().Be(expected);
+        }
     }
 }
