@@ -6,7 +6,7 @@ namespace Tk.Extensions.Benchmarks.Benchmarks
     [RankColumn, MinColumn, MaxColumn, Q1Column, Q3Column, AllStatisticsColumn]
     [JsonExporterAttribute.Full]
     [GcServer(true)]
-    public class LevenshteinDistance_HeterogenousText_Benchmark
+    public class GetLevenshteinDistance_HomogenousText_Benchmark
     {
         private string Value = null!;
         private string Comparand = null!;
@@ -16,15 +16,15 @@ namespace Tk.Extensions.Benchmarks.Benchmarks
 
         [IterationSetup]
         public void IterationSetup()
-        {            
-            Value = "ab".Repeat(Size);
-            Comparand = "ba".Repeat(Size);
+        {
+            Value = new string('a', Size);
+            Comparand = new string('a', Size);
         }
 
         [Benchmark]
-        public void LevenshteinDistance()
+        public void GetLevenshteinDistance()
         {
-            var result = Value.LevenshteinDistance(Comparand);
+            var result = Value.GetLevenshteinDistance(Comparand);
         }
     }
 }

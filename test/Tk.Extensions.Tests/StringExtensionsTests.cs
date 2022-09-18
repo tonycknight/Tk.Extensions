@@ -118,9 +118,9 @@ namespace Tk.Extensions.Tests
         [InlineData("kittens", "sit", 5)]
         [InlineData("king's", "kings", 1)]
         [InlineData("king's cross st pancras", "pancras", 16)]
-        public void LevenshteinDistance_Calculated(string value, string comparand, int expected)
+        public void GetLevenshteinDistance_Calculated(string value, string comparand, int expected)
         {
-            var r = value.LevenshteinDistance(comparand);
+            var r = value.GetLevenshteinDistance(comparand);
 
             r.Should().Be(expected);
         }

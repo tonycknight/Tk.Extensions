@@ -68,7 +68,7 @@ namespace Tk.Extensions
         /// <param name="value"></param>
         /// <param name="comparand"></param>
         /// <returns></returns>
-        public static int LevenshteinDistance(this string value, string comparand)
+        public static int GetLevenshteinDistance(this string value, string comparand)
         {
             value.ArgNotNull(nameof(value));
             comparand.ArgNotNull(nameof(comparand));
