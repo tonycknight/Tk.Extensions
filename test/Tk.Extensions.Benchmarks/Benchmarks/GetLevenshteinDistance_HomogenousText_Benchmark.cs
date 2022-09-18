@@ -26,5 +26,23 @@ namespace Tk.Extensions.Benchmarks.Benchmarks
         {
             var result = Value.GetLevenshteinDistance(Comparand);
         }
+
+        [Benchmark]
+        public void GetLevenshteinDistance_Invariant_IgnoreCase()
+        {
+            var result = Value.GetLevenshteinDistance(Comparand, StringComparer.InvariantCultureIgnoreCase);
+        }
+
+        [Benchmark]
+        public void GetLevenshteinDistance_Ordinal()
+        {
+            var result = Value.GetLevenshteinDistance(Comparand, StringComparer.Ordinal);
+        }
+
+        [Benchmark]
+        public void GetLevenshteinDistance_Ordinal_IgnoreCase()
+        {
+            var result = Value.GetLevenshteinDistance(Comparand, StringComparer.OrdinalIgnoreCase);
+        }
     }
 }

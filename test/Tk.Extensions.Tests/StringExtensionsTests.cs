@@ -124,5 +124,25 @@ namespace Tk.Extensions.Tests
 
             r.Should().Be(expected);
         }
+
+        [Theory]
+        [InlineData("", "aaaa", 4)]
+        [InlineData("aaa", "", 3)]
+        [InlineData("", "", 0)]
+        [InlineData("a", "A", 0)]
+        [InlineData("a", "B", 1)]
+        [InlineData("sitten", "kITTEN", 1)]
+        [InlineData("sittin", "kITTen", 2)]
+        [InlineData("sitten", "KITTIN", 2)]
+        [InlineData("sit", "KITTENS", 5)]
+        [InlineData("kittens", "SIT", 5)]
+        [InlineData("king's", "KINGS", 1)]
+        [InlineData("king's cross st pancras", "PANCRAS", 16)]
+        public void GetLevenshteinDistance_IgnoreCase_Calculated(string value, string comparand, int expected)
+        {
+            var r = value.GetLevenshteinDistance(comparand, StringComparer.InvariantCultureIgnoreCase);
+
+            r.Should().Be(expected);
+        }
     }
 }

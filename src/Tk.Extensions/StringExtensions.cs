@@ -68,11 +68,32 @@ namespace Tk.Extensions
         /// <param name="value"></param>
         /// <param name="comparand"></param>
         /// <returns></returns>
+        [DebuggerStepThrough]
         public static int GetLevenshteinDistance(this string value, string comparand)
+            => value.ArgNotNull(nameof(value))
+                    .GetLevenshteinDistance(comparand.ArgNotNull(nameof(comparand)),
+                                            (a, b) => a == b);
+
+        /// <summary>
+        /// Calculate the Levenshtein edit distance of two strings
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="comparand"></param>
+        /// <param name="comparer"></param>
+        /// <returns></returns>
+        [DebuggerStepThrough]
+        public static int GetLevenshteinDistance(this string value, string comparand, StringComparer comparer)
         {
             value.ArgNotNull(nameof(value));
             comparand.ArgNotNull(nameof(comparand));
+            comparer.ArgNotNull(nameof(comparer));
 
+            return value.GetLevenshteinDistance(comparand,
+                                                (a, b) => comparer.Equals(a.ToString(), b.ToString()));
+        }
+
+        private static int GetLevenshteinDistance(this string value, string comparand, Func<char, char, bool> equality)
+        {
             if (value.Length == 0) return comparand.Length;
             if (comparand.Length == 0) return value.Length;
 
@@ -85,7 +106,8 @@ namespace Tk.Extensions
             {
                 for (var i = 1; i <= value.Length; i++)
                 {
-                    var equal = value[i - 1] == comparand[j - 1];
+                    var equal = equality(value[i - 1], comparand[j - 1]);
+                    
                     var cost = equal ? 0 : 1;
 
                     distance[i, j] = Math.Min(distance[i - 1, j] + 1,
