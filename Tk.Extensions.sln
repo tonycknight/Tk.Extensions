@@ -18,6 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{60BBCDF1
 	ProjectSection(SolutionItems) = preProject
 		build.bat = build.bat
 		build.fsx = build.fsx
+		build.ps1 = build.ps1
 		paket.dependencies = paket.dependencies
 	EndProjectSection
 EndProject
@@ -30,7 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gha", "gha", "{B7B79038-7C0
 		.github\workflows\codeql-analysis.yml = .github\workflows\codeql-analysis.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tk.Extensions.Benchmarks", "test\Tk.Extensions.Benchmarks\Tk.Extensions.Benchmarks.csproj", "{B7705B1E-CCC9-4529-BB16-F64153B52D77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tk.Extensions.Benchmarks", "test\Tk.Extensions.Benchmarks\Tk.Extensions.Benchmarks.csproj", "{B7705B1E-CCC9-4529-BB16-F64153B52D77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
