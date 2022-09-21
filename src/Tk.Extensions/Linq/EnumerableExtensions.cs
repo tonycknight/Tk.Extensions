@@ -41,23 +41,23 @@ namespace Tk.Extensions.Linq
 
         private static IEnumerable<T> Flatten<T>(IEnumerable<T> values, Func<T, IEnumerable<T>> selector)
         {
-            var stack = new Stack<T>();
+            var stack = new Queue<T>();
 
             foreach (var val in values)
             {
-                stack.Push(val);
+                stack.Enqueue(val);
                 yield return val;
             }
 
             while (stack.Count > 0)
             {
-                var val = stack.Pop();
+                var val = stack.Dequeue();
 
                 foreach (var newValue in selector(val))
                 {
                     yield return newValue;
 
-                    stack.Push(newValue);
+                    stack.Enqueue(newValue);
                 }
             }
         }
