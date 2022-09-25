@@ -18,7 +18,7 @@ namespace Tk.Extensions.Benchmarks.Benchmarks
         public void IterationSetup()
         {
             Value = new string('a', Size);
-            Comparand = new string('a', Size);
+            Comparand = new string('b', Size);
         }
 
         [Benchmark]
