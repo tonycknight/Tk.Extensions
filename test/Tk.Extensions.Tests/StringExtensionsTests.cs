@@ -106,6 +106,28 @@ namespace Tk.Extensions.Tests
         }
 
         [Theory]
+        [InlineData(null,"")]
+        [InlineData("", null)]
+        public void GetLevenshteinDistance_NullValues_ExceptionThrown(string value,string comparand)
+        {
+            Func<int> distance = () => value.GetLevenshteinDistance(comparand);
+
+            distance.Should().Throw<ArgumentNullException>();
+        }
+
+        [Theory]
+        [InlineData(null, "")]
+        [InlineData("", null)]
+        [InlineData(" ", "")]
+        [InlineData("", " ")]
+        public void GetLevenshteinDistance_NullComparerValues_ExceptionThrown(string value, string comparand)
+        {
+            Func<int> distance = () => value.GetLevenshteinDistance(comparand, null);
+
+            distance.Should().Throw<ArgumentNullException>();
+        }
+
+        [Theory]
         [InlineData("", "aaaa", 4)]
         [InlineData("aaa", "", 3)]
         [InlineData("", "", 0)]
@@ -118,6 +140,9 @@ namespace Tk.Extensions.Tests
         [InlineData("kittens", "sit", 5)]
         [InlineData("king's", "kings", 1)]
         [InlineData("king's cross st pancras", "pancras", 16)]
+        [InlineData("ab", "ba", 2)]
+        [InlineData("ab", "baa", 2)]
+        [InlineData("kittin", "kititn", 2)]        
         public void GetLevenshteinDistance_Calculated(string value, string comparand, int expected)
         {
             var r = value.GetLevenshteinDistance(comparand);
@@ -144,5 +169,72 @@ namespace Tk.Extensions.Tests
 
             r.Should().Be(expected);
         }
+
+        //
+        [Theory]
+        [InlineData(null, "")]
+        [InlineData("", null)]
+        public void GetDamareuLevenshteinDistance_NullValues_ExceptionThrown(string value, string comparand)
+        {
+            Func<int> distance = () => value.GetDamareuLevenshteinDistance(comparand);
+
+            distance.Should().Throw<ArgumentNullException>();
+        }
+
+        [Theory]
+        [InlineData(null, "")]
+        [InlineData("", null)]
+        [InlineData(" ", "")]
+        [InlineData("", " ")]
+        public void GetDamareuLevenshteinDistance_NullComparerValues_ExceptionThrown(string value, string comparand)
+        {
+            Func<int> distance = () => value.GetDamareuLevenshteinDistance(comparand, null);
+
+            distance.Should().Throw<ArgumentNullException>();
+        }
+
+        [Theory]
+        [InlineData("", "aaaa", 4)]
+        [InlineData("aaa", "", 3)]
+        [InlineData("", "", 0)]
+        [InlineData("a", "a", 0)]
+        [InlineData("a", "b", 1)]
+        [InlineData("sitten", "kitten", 1)]
+        [InlineData("sittin", "kitten", 2)]
+        [InlineData("sitten", "kittin", 2)]
+        [InlineData("sit", "kittens", 5)]
+        [InlineData("kittens", "sit", 5)]
+        [InlineData("king's", "kings", 1)]
+        [InlineData("king's cross st pancras", "pancras", 16)]
+        [InlineData("ab", "ba", 1)]
+        [InlineData("ab", "baa", 2)]
+        [InlineData("kittin", "kititn", 1)]        
+        public void GetDamareuLevenshteinDistance_Calculated(string value, string comparand, int expected)
+        {
+            var r = value.GetDamareuLevenshteinDistance(comparand);
+
+            r.Should().Be(expected);
+        }
+
+        [Theory]
+        [InlineData("", "aaaa", 4)]
+        [InlineData("aaa", "", 3)]
+        [InlineData("", "", 0)]
+        [InlineData("a", "A", 0)]
+        [InlineData("a", "B", 1)]
+        [InlineData("sitten", "kITTEN", 1)]
+        [InlineData("sittin", "kITTen", 2)]
+        [InlineData("sitten", "KITTIN", 2)]
+        [InlineData("sit", "KITTENS", 5)]
+        [InlineData("kittens", "SIT", 5)]
+        [InlineData("king's", "KINGS", 1)]
+        [InlineData("king's cross st pancras", "PANCRAS", 16)]
+        public void GetDamareuLevenshteinDistance_IgnoreCase_Calculated(string value, string comparand, int expected)
+        {
+            var r = value.GetDamareuLevenshteinDistance(comparand, StringComparer.InvariantCultureIgnoreCase);
+
+            r.Should().Be(expected);
+        }
+
     }
 }
