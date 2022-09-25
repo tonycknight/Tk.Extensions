@@ -96,13 +96,13 @@ namespace Tk.Extensions
         }
 
         /// <summary>
-        /// Calculate the Damareu-Levenshtein edit distance of two strings
+        /// Calculate the Damerau-Levenshtein edit distance of two strings
         /// </summary>
         /// <param name="value"></param>
         /// <param name="comparand"></param>
         /// <returns></returns>
         [DebuggerStepThrough]
-        public static int GetDamareuLevenshteinDistance(this string value, string comparand)
+        public static int GetDamerauLevenshteinDistance(this string value, string comparand)
         {
             value.ArgNotNull(nameof(value));
             comparand.ArgNotNull(nameof(comparand));
@@ -111,14 +111,14 @@ namespace Tk.Extensions
         }
 
         /// <summary>
-        /// Calculate the Damareu-Levenshtein edit distance of two strings
+        /// Calculate the Damerau-Levenshtein edit distance of two strings
         /// </summary>
         /// <param name="value"></param>
         /// <param name="comparand"></param>
         /// <param name="comparer"></param>
         /// <returns></returns>
         [DebuggerStepThrough]
-        public static int GetDamareuLevenshteinDistance(this string value, string comparand, StringComparer comparer)
+        public static int GetDamerauLevenshteinDistance(this string value, string comparand, StringComparer comparer)
         {
             value.ArgNotNull(nameof(value));
             comparand.ArgNotNull(nameof(comparand));
@@ -129,7 +129,7 @@ namespace Tk.Extensions
         }
 
 
-        private static int GetLevenshteinDistance(this string value, string comparand, bool damareu, Func<char, char, bool> equality)
+        private static int GetLevenshteinDistance(this string value, string comparand, bool damerau, Func<char, char, bool> equality)
         {
             if (value.Length == 0) return comparand.Length;
             if (comparand.Length == 0) return value.Length;
@@ -151,7 +151,7 @@ namespace Tk.Extensions
                                             Math.Min(distances[i, j - 1] + 1,
                                                      distances[i - 1, j - 1] + cost));
                     
-                    if (damareu &&
+                    if (damerau &&
                         i > 1 && j > 1 &&
                         equality(value[i - 1], comparand[j - 2]) &&
                         equality(value[i - 2], comparand[j - 1]))

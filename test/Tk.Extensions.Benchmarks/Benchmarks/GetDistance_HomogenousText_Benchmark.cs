@@ -47,27 +47,27 @@ namespace Tk.Extensions.Benchmarks.Benchmarks
 
 
         [Benchmark]
-        public void GetDamareuLevenshteinDistance()
+        public void GetDamerauLevenshteinDistance()
         {
-            var result = Value.GetDamareuLevenshteinDistance(Comparand);
+            var result = Value.GetDamerauLevenshteinDistance(Comparand);
         }
 
         [Benchmark]
-        public void GetDamareuLevenshteinDistance_Invariant_IgnoreCase()
+        public void GetDamerauLevenshteinDistance_Invariant_IgnoreCase()
         {
-            var result = Value.GetDamareuLevenshteinDistance(Comparand, StringComparer.InvariantCultureIgnoreCase);
+            var result = Value.GetDamerauLevenshteinDistance(Comparand, StringComparer.InvariantCultureIgnoreCase);
         }
 
         [Benchmark]
-        public void GetDamareuLevenshteinDistance_Ordinal()
+        public void GetDamerauLevenshteinDistance_Ordinal()
         {
-            var result = Value.GetDamareuLevenshteinDistance(Comparand, StringComparer.Ordinal);
+            var result = Value.GetDamerauLevenshteinDistance(Comparand, StringComparer.Ordinal);
         }
 
         [Benchmark]
-        public void GetDamareuLevenshteinDistance_Ordinal_IgnoreCase()
+        public void GetDamerauLevenshteinDistance_Ordinal_IgnoreCase()
         {
-            var result = Value.GetDamareuLevenshteinDistance(Comparand, StringComparer.OrdinalIgnoreCase);
+            var result = Value.GetDamerauLevenshteinDistance(Comparand, StringComparer.OrdinalIgnoreCase);
         }
     }
 }

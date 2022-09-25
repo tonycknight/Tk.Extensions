@@ -174,9 +174,9 @@ namespace Tk.Extensions.Tests
         [Theory]
         [InlineData(null, "")]
         [InlineData("", null)]
-        public void GetDamareuLevenshteinDistance_NullValues_ExceptionThrown(string value, string comparand)
+        public void GetDamerauLevenshteinDistance_NullValues_ExceptionThrown(string value, string comparand)
         {
-            Func<int> distance = () => value.GetDamareuLevenshteinDistance(comparand);
+            Func<int> distance = () => value.GetDamerauLevenshteinDistance(comparand);
 
             distance.Should().Throw<ArgumentNullException>();
         }
@@ -186,9 +186,9 @@ namespace Tk.Extensions.Tests
         [InlineData("", null)]
         [InlineData(" ", "")]
         [InlineData("", " ")]
-        public void GetDamareuLevenshteinDistance_NullComparerValues_ExceptionThrown(string value, string comparand)
+        public void GetDamerauLevenshteinDistance_NullComparerValues_ExceptionThrown(string value, string comparand)
         {
-            Func<int> distance = () => value.GetDamareuLevenshteinDistance(comparand, null);
+            Func<int> distance = () => value.GetDamerauLevenshteinDistance(comparand, null);
 
             distance.Should().Throw<ArgumentNullException>();
         }
@@ -209,9 +209,9 @@ namespace Tk.Extensions.Tests
         [InlineData("ab", "ba", 1)]
         [InlineData("ab", "baa", 2)]
         [InlineData("kittin", "kititn", 1)]        
-        public void GetDamareuLevenshteinDistance_Calculated(string value, string comparand, int expected)
+        public void GetDamerauLevenshteinDistance_Calculated(string value, string comparand, int expected)
         {
-            var r = value.GetDamareuLevenshteinDistance(comparand);
+            var r = value.GetDamerauLevenshteinDistance(comparand);
 
             r.Should().Be(expected);
         }
@@ -229,9 +229,9 @@ namespace Tk.Extensions.Tests
         [InlineData("kittens", "SIT", 5)]
         [InlineData("king's", "KINGS", 1)]
         [InlineData("king's cross st pancras", "PANCRAS", 16)]
-        public void GetDamareuLevenshteinDistance_IgnoreCase_Calculated(string value, string comparand, int expected)
+        public void GetDamerauLevenshteinDistance_IgnoreCase_Calculated(string value, string comparand, int expected)
         {
-            var r = value.GetDamareuLevenshteinDistance(comparand, StringComparer.InvariantCultureIgnoreCase);
+            var r = value.GetDamerauLevenshteinDistance(comparand, StringComparer.InvariantCultureIgnoreCase);
 
             r.Should().Be(expected);
         }
