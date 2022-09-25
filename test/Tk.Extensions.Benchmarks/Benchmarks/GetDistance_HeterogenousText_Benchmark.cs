@@ -6,7 +6,7 @@ namespace Tk.Extensions.Benchmarks.Benchmarks
     [RankColumn, MinColumn, MaxColumn, Q1Column, Q3Column, AllStatisticsColumn]
     [JsonExporterAttribute.Full]
     [GcServer(true)]
-    public class GetLevenshteinDistance_HeterogenousText_Benchmark
+    public class GetDistance_HeterogenousText_Benchmark
     {
         private string Value = null!;
         private string Comparand = null!;
@@ -43,6 +43,30 @@ namespace Tk.Extensions.Benchmarks.Benchmarks
         public void GetLevenshteinDistance_Ordinal_IgnoreCase()
         {
             var result = Value.GetLevenshteinDistance(Comparand, StringComparer.OrdinalIgnoreCase);
+        }
+        
+        [Benchmark]
+        public void GetDamerauLevenshteinDistance()
+        {
+            var result = Value.GetDamerauLevenshteinDistance(Comparand);
+        }
+
+        [Benchmark]
+        public void GetDamerauLevenshteinDistance_Invariant_IgnoreCase()
+        {
+            var result = Value.GetDamerauLevenshteinDistance(Comparand, StringComparer.InvariantCultureIgnoreCase);
+        }
+
+        [Benchmark]
+        public void GetDamerauLevenshteinDistance_Ordinal()
+        {
+            var result = Value.GetDamerauLevenshteinDistance(Comparand, StringComparer.Ordinal);
+        }
+
+        [Benchmark]
+        public void GetDamerauLevenshteinDistance_Ordinal_IgnoreCase()
+        {
+            var result = Value.GetDamerauLevenshteinDistance(Comparand, StringComparer.OrdinalIgnoreCase);
         }
     }
 }

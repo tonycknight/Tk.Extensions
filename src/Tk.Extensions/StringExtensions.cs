@@ -70,10 +70,13 @@ namespace Tk.Extensions
         /// <returns></returns>
         [DebuggerStepThrough]
         public static int GetLevenshteinDistance(this string value, string comparand)
-            => value.ArgNotNull(nameof(value))
-                    .GetLevenshteinDistance(comparand.ArgNotNull(nameof(comparand)),
-                                            (a, b) => a == b);
+        {
+            value.ArgNotNull(nameof(value));
+            comparand.ArgNotNull(nameof(comparand));
 
+            return value.GetLevenshteinDistance(comparand, false, (a, b) => a == b);
+        }
+                
         /// <summary>
         /// Calculate the Levenshtein edit distance of two strings
         /// </summary>
@@ -88,19 +91,53 @@ namespace Tk.Extensions
             comparand.ArgNotNull(nameof(comparand));
             comparer.ArgNotNull(nameof(comparer));
 
-            return value.GetLevenshteinDistance(comparand,
+            return value.GetLevenshteinDistance(comparand, false,
                                                 (a, b) => comparer.Equals(a.ToString(), b.ToString()));
         }
 
-        private static int GetLevenshteinDistance(this string value, string comparand, Func<char, char, bool> equality)
+        /// <summary>
+        /// Calculate the Damerau-Levenshtein edit distance of two strings
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="comparand"></param>
+        /// <returns></returns>
+        [DebuggerStepThrough]
+        public static int GetDamerauLevenshteinDistance(this string value, string comparand)
+        {
+            value.ArgNotNull(nameof(value));
+            comparand.ArgNotNull(nameof(comparand));
+
+            return value.GetLevenshteinDistance(comparand, true, (a, b) => a == b);
+        }
+
+        /// <summary>
+        /// Calculate the Damerau-Levenshtein edit distance of two strings
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="comparand"></param>
+        /// <param name="comparer"></param>
+        /// <returns></returns>
+        [DebuggerStepThrough]
+        public static int GetDamerauLevenshteinDistance(this string value, string comparand, StringComparer comparer)
+        {
+            value.ArgNotNull(nameof(value));
+            comparand.ArgNotNull(nameof(comparand));
+            comparer.ArgNotNull(nameof(comparer));
+
+            return value.GetLevenshteinDistance(comparand, true,
+                                                (a, b) => comparer.Equals(a.ToString(), b.ToString()));
+        }
+
+
+        private static int GetLevenshteinDistance(this string value, string comparand, bool damerau, Func<char, char, bool> equality)
         {
             if (value.Length == 0) return comparand.Length;
             if (comparand.Length == 0) return value.Length;
 
-            var distance = new int[value.Length + 1, comparand.Length + 1];
+            var distances = new int[value.Length + 1, comparand.Length + 1];
 
-            for (var i = 1; i <= value.Length; i++) distance[i, 0] = i;
-            for (var j = 1; j <= comparand.Length; j++) distance[0, j] = j;
+            for (var i = 1; i <= value.Length; i++) distances[i, 0] = i;
+            for (var j = 1; j <= comparand.Length; j++) distances[0, j] = j;
 
             for (var j = 1; j <= comparand.Length; j++)
             {
@@ -110,13 +147,23 @@ namespace Tk.Extensions
                     
                     var cost = equal ? 0 : 1;
 
-                    distance[i, j] = Math.Min(distance[i - 1, j] + 1,
-                                                Math.Min(distance[i, j - 1] + 1,
-                                                         distance[i - 1, j - 1] + cost));
+                    var distance = Math.Min(distances[i - 1, j] + 1,
+                                            Math.Min(distances[i, j - 1] + 1,
+                                                     distances[i - 1, j - 1] + cost));
+                    
+                    if (damerau &&
+                        i > 1 && j > 1 &&
+                        equality(value[i - 1], comparand[j - 2]) &&
+                        equality(value[i - 2], comparand[j - 1]))
+                    {
+                        distance = Math.Min(distance, distances[i - 2, j - 2] + cost);
+                    }
+
+                    distances[i, j] = distance;
                 }
             }
 
-            return distance[value.Length, comparand.Length];
+            return distances[value.Length, comparand.Length];
         }
     }
 }
