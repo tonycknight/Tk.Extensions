@@ -107,6 +107,21 @@ namespace Tk.Extensions.Tests.Linq
             sum.Should().Be(expected);
         }
 
+        [Theory]
+        [InlineData(0, 3)]
+        [InlineData(1, 3)]
+        [InlineData(3, 0)]
+        [InlineData(3, 1)]
+        [InlineData(3, 2)]
+        public void ToInfinite_YieldsRepeatedSequences(int size, int count)
+        {
+            var xs = Enumerable.Range(1, size);
+            var sequence = Enumerable.Range(1, count).SelectMany(_ => xs).ToList();
+
+            var result = xs.ToInfinite().Take(size * count).ToList();
+
+            result.Should().BeEquivalentTo(sequence);
+        }
 
     }
 }
