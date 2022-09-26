@@ -28,23 +28,11 @@ namespace Tk.Extensions.Benchmarks.Benchmarks
         }
 
         [Benchmark]
-        public void GetLevenshteinDistance_Invariant_IgnoreCase()
+        public void GetLevenshteinDistance_IgnoreCase()
         {
-            var result = Value.GetLevenshteinDistance(Comparand, StringComparer.InvariantCultureIgnoreCase);
+            var result = Value.GetLevenshteinDistance(Comparand, true);
         }
 
-        [Benchmark]
-        public void GetLevenshteinDistance_Ordinal()
-        {
-            var result = Value.GetLevenshteinDistance(Comparand, StringComparer.Ordinal);
-        }
-
-        [Benchmark]
-        public void GetLevenshteinDistance_Ordinal_IgnoreCase()
-        {
-            var result = Value.GetLevenshteinDistance(Comparand, StringComparer.OrdinalIgnoreCase);
-        }
-        
         [Benchmark]
         public void GetDamerauLevenshteinDistance()
         {
@@ -52,21 +40,9 @@ namespace Tk.Extensions.Benchmarks.Benchmarks
         }
 
         [Benchmark]
-        public void GetDamerauLevenshteinDistance_Invariant_IgnoreCase()
+        public void GetDamerauLevenshteinDistance_IgnoreCase()
         {
-            var result = Value.GetDamerauLevenshteinDistance(Comparand, StringComparer.InvariantCultureIgnoreCase);
-        }
-
-        [Benchmark]
-        public void GetDamerauLevenshteinDistance_Ordinal()
-        {
-            var result = Value.GetDamerauLevenshteinDistance(Comparand, StringComparer.Ordinal);
-        }
-
-        [Benchmark]
-        public void GetDamerauLevenshteinDistance_Ordinal_IgnoreCase()
-        {
-            var result = Value.GetDamerauLevenshteinDistance(Comparand, StringComparer.OrdinalIgnoreCase);
+            var result = Value.GetDamerauLevenshteinDistance(Comparand, true);
         }
     }
 }
