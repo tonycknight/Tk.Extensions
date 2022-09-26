@@ -38,6 +38,22 @@ namespace Tk.Extensions.Linq
             => Flatten(values.ArgNotNull(nameof(values)), 
                        selector.ArgNotNull(nameof(selector)));
 
+        /// <summary>
+        /// Given a sequence, produce an infinite sequence
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> ToInfinite<T>(this IEnumerable<T> values)
+        {
+            while (true)
+            {
+                foreach(var value in values)
+                {
+                    yield return value;
+                }
+            }
+        }
 
         private static IEnumerable<T> Flatten<T>(IEnumerable<T> values, Func<T, IEnumerable<T>> selector)
         {
