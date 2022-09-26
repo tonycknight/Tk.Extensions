@@ -118,11 +118,9 @@ namespace Tk.Extensions.Tests
         [Theory]
         [InlineData(null, "")]
         [InlineData("", null)]
-        [InlineData(" ", "")]
-        [InlineData("", " ")]
         public void GetLevenshteinDistance_NullComparerValues_ExceptionThrown(string value, string comparand)
         {
-            Func<int> distance = () => value.GetLevenshteinDistance(comparand, null);
+            Func<int> distance = () => value.GetLevenshteinDistance(comparand, true);
 
             distance.Should().Throw<ArgumentNullException>();
         }
@@ -132,6 +130,8 @@ namespace Tk.Extensions.Tests
         [InlineData("aaa", "", 3)]
         [InlineData("", "", 0)]
         [InlineData("a", "a", 0)]
+        [InlineData("a", "A", 1)]
+        [InlineData("A", "a", 1)]
         [InlineData("a", "b", 1)]
         [InlineData("sitten", "kitten", 1)]
         [InlineData("sittin", "kitten", 2)]
@@ -165,12 +165,11 @@ namespace Tk.Extensions.Tests
         [InlineData("king's cross st pancras", "PANCRAS", 16)]
         public void GetLevenshteinDistance_IgnoreCase_Calculated(string value, string comparand, int expected)
         {
-            var r = value.GetLevenshteinDistance(comparand, StringComparer.InvariantCultureIgnoreCase);
+            var r = value.GetLevenshteinDistance(comparand, true);
 
             r.Should().Be(expected);
         }
 
-        //
         [Theory]
         [InlineData(null, "")]
         [InlineData("", null)]
@@ -184,11 +183,9 @@ namespace Tk.Extensions.Tests
         [Theory]
         [InlineData(null, "")]
         [InlineData("", null)]
-        [InlineData(" ", "")]
-        [InlineData("", " ")]
         public void GetDamerauLevenshteinDistance_NullComparerValues_ExceptionThrown(string value, string comparand)
         {
-            Func<int> distance = () => value.GetDamerauLevenshteinDistance(comparand, null);
+            Func<int> distance = () => value.GetDamerauLevenshteinDistance(comparand, true);
 
             distance.Should().Throw<ArgumentNullException>();
         }
@@ -198,6 +195,8 @@ namespace Tk.Extensions.Tests
         [InlineData("aaa", "", 3)]
         [InlineData("", "", 0)]
         [InlineData("a", "a", 0)]
+        [InlineData("a", "A", 1)]
+        [InlineData("A", "a", 1)]
         [InlineData("a", "b", 1)]
         [InlineData("sitten", "kitten", 1)]
         [InlineData("sittin", "kitten", 2)]
@@ -231,7 +230,7 @@ namespace Tk.Extensions.Tests
         [InlineData("king's cross st pancras", "PANCRAS", 16)]
         public void GetDamerauLevenshteinDistance_IgnoreCase_Calculated(string value, string comparand, int expected)
         {
-            var r = value.GetDamerauLevenshteinDistance(comparand, StringComparer.InvariantCultureIgnoreCase);
+            var r = value.GetDamerauLevenshteinDistance(comparand, true);
 
             r.Should().Be(expected);
         }
