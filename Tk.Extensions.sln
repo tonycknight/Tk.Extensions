@@ -29,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gha", "gha", "{B7B79038-7C0
 		.github\workflows\build.yml = .github\workflows\build.yml
 		.github\workflows\clean-builds.yaml = .github\workflows\clean-builds.yaml
 		.github\workflows\codeql-analysis.yml = .github\workflows\codeql-analysis.yml
+		.github\workflows\sca.yml = .github\workflows\sca.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tk.Extensions.Benchmarks", "test\Tk.Extensions.Benchmarks\Tk.Extensions.Benchmarks.csproj", "{B7705B1E-CCC9-4529-BB16-F64153B52D77}"
