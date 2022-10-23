@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Threading.Tasks;
+using FluentAssertions;
 using Tk.Extensions.Tasks;
 using Xunit;
 
@@ -11,11 +12,11 @@ namespace Tk.Extensions.Tests.Tasks
         [InlineData("")]
         [InlineData(" ")]
         [InlineData(" abc ")]
-        public void ToTaskResult_TaskReturned(string value)
+        public async Task ToTaskResult_TaskReturned(string value)
         {
             var r = value.ToTaskResult();
 
-            var r2 = r.GetAwaiter().GetResult();
+            var r2 = await r;
 
             r2.Should().Be(value);
         }
