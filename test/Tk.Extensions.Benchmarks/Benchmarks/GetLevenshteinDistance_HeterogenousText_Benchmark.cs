@@ -6,7 +6,7 @@ namespace Tk.Extensions.Benchmarks.Benchmarks
     [RankColumn, MinColumn, MaxColumn, Q1Column, Q3Column, AllStatisticsColumn]
     [JsonExporterAttribute.Full]
     [GcServer(true)]
-    public class GetDistance_HeterogenousText_Benchmark
+    public class GetLevenshteinDistance_HeterogenousText_Benchmark
     {
         private string Value = null!;
         private string Comparand = null!;
