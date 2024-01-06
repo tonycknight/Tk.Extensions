@@ -27,7 +27,7 @@ jobs:
         run: dotnet tool restore
               
       - name: Run build
-        run: dotnet run --project .\build\build.fsproj -c Release -t "Consolidate code coverage"
+        run: dotnet run --project ./build/build.fsproj -c Release -t "Consolidate code coverage"
 
       - name: Archive Test results
         uses: actions/upload-artifact@v3
@@ -90,7 +90,7 @@ jobs:
         run: dotnet tool restore
               
       - name: Run build
-        run: dotnet run --project .\build\build.fsproj -c Release -t "Stryker"
+        run: dotnet run --project ./build/build.fsproj -c Release -t "Stryker"
 
       - name: Archive Stryker results
         uses: actions/upload-artifact@v3
@@ -114,7 +114,7 @@ jobs:
         run: dotnet tool restore
               
       - name: Run build
-        run: dotnet run --project .\build\build.fsproj -c Release -t "Benchmarks"
+        run: dotnet run --project ./build/build.fsproj -c Release -t "Benchmarks"
 
       - name: Archive Benchmark results
         uses: actions/upload-artifact@v3

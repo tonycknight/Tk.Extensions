@@ -26,5 +26,5 @@ jobs:
       - name: dotnet SCA
         run: |
           dotnet tool restore
-          dotnet run --project .\build\build.fsproj -c Release -t SCA
+          dotnet run --project ./build/build.fsproj -c Release -t SCA
           
