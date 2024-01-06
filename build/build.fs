@@ -168,8 +168,7 @@ let initTargets () =
             failwith "Reformatting needed.")
 
     Target.create "Apply Style Rules" (fun _ ->
-        let args = "--recurse ./src/ ./test/"
-        let result = DotNet.exec id "format" args
+        let result = DotNet.exec id "format" ""
 
         if result.OK then
             Trace.log "No files need formatting"
