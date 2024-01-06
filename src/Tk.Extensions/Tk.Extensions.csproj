@@ -9,7 +9,13 @@
     <Description>Some eclectic extensions</Description>
     <PackageProjectUrl>https://github.com/tonycknight/Tk.Extensions</PackageProjectUrl>    
     <LangVersion>latest</LangVersion>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <Import Project="..\..\.paket\Paket.Restore.targets" />
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Link="README.md" pack="true" PackagePath="."/>
+  </ItemGroup>
 </Project>
