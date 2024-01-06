@@ -8,6 +8,7 @@
     <Copyright>Tony Knight 2022</Copyright>
     <Description>Some eclectic extensions</Description>
     <PackageProjectUrl>https://github.com/tonycknight/Tk.Extensions</PackageProjectUrl>    
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <Import Project="..\..\.paket\Paket.Restore.targets" />

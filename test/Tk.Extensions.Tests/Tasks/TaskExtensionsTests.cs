@@ -12,7 +12,7 @@ namespace Tk.Extensions.Tests.Tasks
         [InlineData("")]
         [InlineData(" ")]
         [InlineData(" abc ")]
-        public async Task ToTaskResult_TaskReturned(string value)
+        public async Task ToTaskResult_TaskReturned(string? value)
         {
             var r = value.ToTaskResult();
 

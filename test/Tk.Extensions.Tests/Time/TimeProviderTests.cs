@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Tk.Extensions.Time;
 using Xunit;
+using TimeProvider = Tk.Extensions.Time.TimeProvider;
 
 namespace Tk.Extensions.Tests.Time
 {

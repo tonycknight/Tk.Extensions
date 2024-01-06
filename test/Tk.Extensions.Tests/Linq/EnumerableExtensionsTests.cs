@@ -43,7 +43,7 @@ namespace Tk.Extensions.Tests.Linq
         [InlineData("")]
         [InlineData(" ")]
         [InlineData(" a ")]
-        public void Singleton_ReturnsSequence(string value)
+        public void Singleton_ReturnsSequence(string? value)
         {
             var r = value.Singleton();
 

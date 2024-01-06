@@ -108,7 +108,7 @@ namespace Tk.Extensions.Tests
         [Theory]
         [InlineData(null,"")]
         [InlineData("", null)]
-        public void GetLevenshteinDistance_NullValues_ExceptionThrown(string value,string comparand)
+        public void GetLevenshteinDistance_NullValues_ExceptionThrown(string? value, string? comparand)
         {
             Func<int> distance = () => value.GetLevenshteinDistance(comparand);
 
@@ -118,7 +118,7 @@ namespace Tk.Extensions.Tests
         [Theory]
         [InlineData(null, "")]
         [InlineData("", null)]
-        public void GetLevenshteinDistance_NullComparerValues_ExceptionThrown(string value, string comparand)
+        public void GetLevenshteinDistance_NullComparerValues_ExceptionThrown(string? value, string? comparand)
         {
             Func<int> distance = () => value.GetLevenshteinDistance(comparand, true);
 
@@ -173,7 +173,7 @@ namespace Tk.Extensions.Tests
         [Theory]
         [InlineData(null, "")]
         [InlineData("", null)]
-        public void GetDamerauLevenshteinDistance_NullValues_ExceptionThrown(string value, string comparand)
+        public void GetDamerauLevenshteinDistance_NullValues_ExceptionThrown(string? value, string? comparand)
         {
             Func<int> distance = () => value.GetDamerauLevenshteinDistance(comparand);
 
@@ -183,7 +183,7 @@ namespace Tk.Extensions.Tests
         [Theory]
         [InlineData(null, "")]
         [InlineData("", null)]
-        public void GetDamerauLevenshteinDistance_NullComparerValues_ExceptionThrown(string value, string comparand)
+        public void GetDamerauLevenshteinDistance_NullComparerValues_ExceptionThrown(string? value, string? comparand)
         {
             Func<int> distance = () => value.GetDamerauLevenshteinDistance(comparand, true);
 
