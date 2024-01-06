@@ -11,13 +11,13 @@ An eclectic mix of extension methods and other utilities.
 # Building
 
 ```
-build.bat
+build.ps1
 ```
 
 or
 
 ```
 dotnet tool restore
-dotnet fake run "build.fsx"
+dotnet run --project .\build\build.fsproj -c Release
 ```
 

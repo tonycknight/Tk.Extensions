@@ -22,14 +22,12 @@ jobs:
 
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: "6.0.x"
-        
+                        
       - name: dotnet tool restore
         run: dotnet tool restore
               
       - name: Run build
-        run: dotnet fake run "build.fsx" -t "Consolidate code coverage"
+        run: dotnet run --project .\build\build.fsproj -c Release -t "Consolidate code coverage"
 
       - name: Archive Test results
         uses: actions/upload-artifact@v3
@@ -87,14 +85,12 @@ jobs:
 
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: "6.0.x"
-        
+                
       - name: dotnet tool restore
         run: dotnet tool restore
               
       - name: Run build
-        run: dotnet fake run "build.fsx" -t "Stryker"
+        run: dotnet run --project .\build\build.fsproj -c Release -t "Stryker"
 
       - name: Archive Stryker results
         uses: actions/upload-artifact@v3
@@ -113,14 +109,12 @@ jobs:
 
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: "6.0.x"
-        
+                
       - name: dotnet tool restore
         run: dotnet tool restore
               
       - name: Run build
-        run: dotnet fake run "build.fsx" -t "Benchmarks"
+        run: dotnet run --project .\build\build.fsproj -c Release -t "Benchmarks"
 
       - name: Archive Benchmark results
         uses: actions/upload-artifact@v3
@@ -141,9 +135,7 @@ jobs:
 
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: "6.0.x"
-
+        
       - name: Download package
         uses: actions/download-artifact@v3
         with:
