@@ -1,14 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Authors>Tony Knight</Authors>
     <Copyright>Tony Knight 2022</Copyright>
     <Description>Some eclectic extensions</Description>
     <PackageProjectUrl>https://github.com/tonycknight/Tk.Extensions</PackageProjectUrl>    
+    <LangVersion>latest</LangVersion>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <Import Project="..\..\.paket\Paket.Restore.targets" />
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Link="README.md" pack="true" PackagePath="."/>
+  </ItemGroup>
 </Project>

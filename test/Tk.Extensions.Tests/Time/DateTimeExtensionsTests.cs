@@ -7,7 +7,7 @@ namespace Tk.Extensions.Tests.Time
 {
     public class DateTimeExtensionsTests
     {
-        
+
         [Theory]
         [InlineData(11, 0)]
         [InlineData(12, 0)]

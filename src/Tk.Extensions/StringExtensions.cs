@@ -76,7 +76,7 @@ namespace Tk.Extensions
 
             return value.GetLevenshteinDistance(comparand, false, false);
         }
-                
+
         /// <summary>
         /// Calculate the Levenshtein edit distance of two strings
         /// </summary>
@@ -120,7 +120,7 @@ namespace Tk.Extensions
         {
             value.ArgNotNull(nameof(value));
             comparand.ArgNotNull(nameof(comparand));
-            
+
             return value.GetLevenshteinDistance(comparand, true, ignoreCase);
         }
 
@@ -132,7 +132,7 @@ namespace Tk.Extensions
             if (comparand.Length == 0) return value.Length;
             var comp = ignoreCase ? StringComparer.InvariantCultureIgnoreCase : StringComparer.InvariantCulture;
             if (comp.Equals(value, comparand)) return 0;
-                                    
+
             var distances = new int[value.Length + 1, comparand.Length + 1];
             var values = ignoreCase ? value.ToUpperInvariant() : value;
             var comparands = ignoreCase ? comparand.ToUpperInvariant() : comparand;
@@ -145,13 +145,13 @@ namespace Tk.Extensions
                 for (var i = 1; i <= value.Length; i++)
                 {
                     var equal = values[i - 1] == comparands[j - 1];
-                    
+
                     var cost = equal ? 0 : 1;
 
                     var distance = Math.Min(distances[i - 1, j] + 1,
                                             Math.Min(distances[i, j - 1] + 1,
                                                      distances[i - 1, j - 1] + cost));
-                    
+
                     if (damerau &&
                         i > 1 && j > 1 &&
                         values[i - 1] == comparands[j - 2] &&

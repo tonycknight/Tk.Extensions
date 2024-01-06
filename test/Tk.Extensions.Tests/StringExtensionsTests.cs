@@ -41,7 +41,7 @@ namespace Tk.Extensions.Tests
             var r = ss.Join("");
 
             var expected = new String(cs);
-            
+
             r.Should().Be(expected);
         }
 
@@ -59,7 +59,7 @@ namespace Tk.Extensions.Tests
             var r = ss.Join(d.ToString());
 
             var expected = new String(d, count - 1);
-            
+
             r.Should().Be(expected);
         }
 
@@ -106,9 +106,9 @@ namespace Tk.Extensions.Tests
         }
 
         [Theory]
-        [InlineData(null,"")]
+        [InlineData(null, "")]
         [InlineData("", null)]
-        public void GetLevenshteinDistance_NullValues_ExceptionThrown(string value,string comparand)
+        public void GetLevenshteinDistance_NullValues_ExceptionThrown(string? value, string? comparand)
         {
             Func<int> distance = () => value.GetLevenshteinDistance(comparand);
 
@@ -118,7 +118,7 @@ namespace Tk.Extensions.Tests
         [Theory]
         [InlineData(null, "")]
         [InlineData("", null)]
-        public void GetLevenshteinDistance_NullComparerValues_ExceptionThrown(string value, string comparand)
+        public void GetLevenshteinDistance_NullComparerValues_ExceptionThrown(string? value, string? comparand)
         {
             Func<int> distance = () => value.GetLevenshteinDistance(comparand, true);
 
@@ -142,7 +142,7 @@ namespace Tk.Extensions.Tests
         [InlineData("king's cross st pancras", "pancras", 16)]
         [InlineData("ab", "ba", 2)]
         [InlineData("ab", "baa", 2)]
-        [InlineData("kittin", "kititn", 2)]        
+        [InlineData("kittin", "kititn", 2)]
         public void GetLevenshteinDistance_Calculated(string value, string comparand, int expected)
         {
             var r = value.GetLevenshteinDistance(comparand);
@@ -173,7 +173,7 @@ namespace Tk.Extensions.Tests
         [Theory]
         [InlineData(null, "")]
         [InlineData("", null)]
-        public void GetDamerauLevenshteinDistance_NullValues_ExceptionThrown(string value, string comparand)
+        public void GetDamerauLevenshteinDistance_NullValues_ExceptionThrown(string? value, string? comparand)
         {
             Func<int> distance = () => value.GetDamerauLevenshteinDistance(comparand);
 
@@ -183,7 +183,7 @@ namespace Tk.Extensions.Tests
         [Theory]
         [InlineData(null, "")]
         [InlineData("", null)]
-        public void GetDamerauLevenshteinDistance_NullComparerValues_ExceptionThrown(string value, string comparand)
+        public void GetDamerauLevenshteinDistance_NullComparerValues_ExceptionThrown(string? value, string? comparand)
         {
             Func<int> distance = () => value.GetDamerauLevenshteinDistance(comparand, true);
 
@@ -207,7 +207,7 @@ namespace Tk.Extensions.Tests
         [InlineData("king's cross st pancras", "pancras", 16)]
         [InlineData("ab", "ba", 1)]
         [InlineData("ab", "baa", 2)]
-        [InlineData("kittin", "kititn", 1)]        
+        [InlineData("kittin", "kititn", 1)]
         public void GetDamerauLevenshteinDistance_Calculated(string value, string comparand, int expected)
         {
             var r = value.GetDamerauLevenshteinDistance(comparand);

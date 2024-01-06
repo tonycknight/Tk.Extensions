@@ -19,7 +19,7 @@ namespace Tk.Extensions.Collections
             where TValue : class
         {
             values.ArgNotNull(nameof(values));
-            
+
             if (values.TryGetValue(key, out var value))
             {
                 return value;

@@ -16,7 +16,7 @@ namespace Tk.Extensions.Benchmarks.Benchmarks
 
         [IterationSetup]
         public void IterationSetup()
-        {            
+        {
             Value = "ab".Repeat(Size);
             Comparand = "ba".Repeat(Size);
         }

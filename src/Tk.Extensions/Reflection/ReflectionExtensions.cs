@@ -21,7 +21,7 @@ namespace Tk.Extensions.Reflection
         /// <param name="type"></param>
         /// <returns></returns>
         [DebuggerStepThrough]
-        public static IEnumerable<Attribute> GetAssemblyCustomAttributes(this Type type) 
+        public static IEnumerable<Attribute> GetAssemblyCustomAttributes(this Type type)
             => type.Assembly.GetCustomAttributes();
 
         /// <summary>

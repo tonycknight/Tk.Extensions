@@ -43,7 +43,7 @@ namespace Tk.Extensions.Tests.Linq
         [InlineData("")]
         [InlineData(" ")]
         [InlineData(" a ")]
-        public void Singleton_ReturnsSequence(string value)
+        public void Singleton_ReturnsSequence(string? value)
         {
             var r = value.Singleton();
 
@@ -54,7 +54,7 @@ namespace Tk.Extensions.Tests.Linq
 
         [Fact]
         public void SelectFlat_EmptyValues_EmptyResult()
-        {            
+        {
             var result = Enumerable.Empty<int>().SelectFlat(x => x.Singleton()).ToList();
 
             result.Should().BeEmpty();
@@ -66,9 +66,9 @@ namespace Tk.Extensions.Tests.Linq
         [InlineData(2, 1, 3)]
         public void SelectFlat_SingleValue_SingleResult(params int[] values)
         {
-            
+
             var result = values.SelectFlat(x => Enumerable.Empty<int>()).ToList();
-            
+
             result.Should().BeEquivalentTo(values);
         }
 
@@ -78,9 +78,9 @@ namespace Tk.Extensions.Tests.Linq
         [InlineData(5)]
         [InlineData(7)]
         public void SelectFlat_SingleValue_DepthCheck(int limit)
-        {            
+        {
             var result = 1.Singleton()
-                           .SelectFlat(x => (x+1).Singleton())
+                           .SelectFlat(x => (x + 1).Singleton())
                            .TakeWhile(x => x <= limit)
                            .ToList();
             var expected = Enumerable.Range(1, limit).ToList();
@@ -101,7 +101,7 @@ namespace Tk.Extensions.Tests.Linq
                                                   .Select(y => y * 10)
                                                   .TakeWhile(x => x < limit))
                        .ToList();
-            
+
             var sum = ys.Sum();
 
             sum.Should().Be(expected);
