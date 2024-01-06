@@ -34,8 +34,8 @@ namespace Tk.Extensions.Linq
         /// <param name="values"></param>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public static IEnumerable<T> SelectFlat<T>(this IEnumerable<T> values, Func<T, IEnumerable<T>> selector) 
-            => Flatten(values.ArgNotNull(nameof(values)), 
+        public static IEnumerable<T> SelectFlat<T>(this IEnumerable<T> values, Func<T, IEnumerable<T>> selector)
+            => Flatten(values.ArgNotNull(nameof(values)),
                        selector.ArgNotNull(nameof(selector)));
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Tk.Extensions.Linq
         {
             while (true)
             {
-                foreach(var value in values)
+                foreach (var value in values)
                 {
                     yield return value;
                 }
