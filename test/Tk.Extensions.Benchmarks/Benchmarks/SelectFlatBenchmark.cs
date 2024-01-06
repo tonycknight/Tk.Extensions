@@ -23,7 +23,7 @@ namespace Tk.Extensions.Benchmarks.Benchmarks
 
         [IterationSetup]
         public void IterationSetup()
-        {            
+        {
             _flatIntegers = Enumerable.Range(1, Size).Select(i => Size - i).ToList();
         }
 

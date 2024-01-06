@@ -68,7 +68,7 @@ namespace Tk.Extensions.Tests.Collections
 
             var r = d.GetOrDefault(testKey);
 
-            r.Should().Be(default);            
+            r.Should().Be(default);
         }
     }
 }
