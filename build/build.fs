@@ -203,7 +203,7 @@ let initTargets () =
 
     "Restore" ==> "SCA" ==>! "All"
 
-    // "Restore" ==> "Check Style Rules" ==>! "All"
+    "Restore" ==> "Check Style Rules" ==>! "All"
 
     "Clean" ==> "Restore" ==> "Compile" ==> "Benchmarks" ==>! "All"
 
