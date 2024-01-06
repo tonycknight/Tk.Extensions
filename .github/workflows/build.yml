@@ -137,7 +137,7 @@ jobs:
         run: dotnet run --project ./build/build.fsproj -c Release -t "Build"
 
       - name: Push nuget package
-        if: false # TODO: temporary
+        if: github.event_name == 'push'
         run: dotnet nuget push "package/*.nupkg"  --api-key ${{ secrets.NUGET_PAT }} --source "nuget.org"
 
   create-gh-release:
