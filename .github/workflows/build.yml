@@ -23,7 +23,7 @@ jobs:
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v4
                         
-      - name: dotnet tool restore
+      - name: Restore tools
         run: dotnet tool restore
               
       - name: Run tests
@@ -83,7 +83,7 @@ jobs:
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v4
                 
-      - name: dotnet tool restore
+      - name: Restore tools
         run: dotnet tool restore
               
       - name: Run build
@@ -107,9 +107,12 @@ jobs:
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v4
                 
-      - name: dotnet tool restore
+      - name: Restore tools
         run: dotnet tool restore
               
+      - name: Build
+        run: dotnet build -c Release
+
       - name: Run build
         run: dotnet "test/Tk.Extensions.Benchmarks/bin/Release/net8.0/Tk.Extensions.Benchmarks.dll" "-f *"
 
@@ -133,7 +136,7 @@ jobs:
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v4
 
-      - name: dotnet tool restore
+      - name: Restore tools
         run: dotnet tool restore
                     
       - name: Run build
