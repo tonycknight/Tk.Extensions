@@ -113,7 +113,7 @@ jobs:
         run: dotnet build -c Release
 
       - name: Run build
-        run: dotnet "test/Tk.Extensions.Benchmarks/bin/Release/net8.0/Tk.Extensions.Benchmarks.dll" "-f *"
+        run: dotnet run "test/Tk.Extensions.Benchmarks/bin/Release/net8.0/Tk.Extensions.Benchmarks.dll" "-f *"
 
       - name: Archive Benchmark results
         uses: actions/upload-artifact@v4
