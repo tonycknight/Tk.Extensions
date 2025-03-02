@@ -40,14 +40,7 @@ jobs:
           name: tests.results
           path: |
             ./test/**/TestResults/*
-            
-      - name: Archive Code coverage
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: codecoverage
-          path: ./publish/codecoverage/*.*
-                    
+                                
       - name: Unit test results
         uses: dorny/test-reporter@v1
         if: always()
