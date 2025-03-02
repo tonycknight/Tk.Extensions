@@ -18,10 +18,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
                         
       - name: dotnet tool restore
         run: dotnet tool restore
@@ -30,7 +30,7 @@ jobs:
         run: dotnet run --project ./build/build.fsproj -c Release -t "Consolidate code coverage"
 
       - name: Archive Test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: tests.results
@@ -38,7 +38,7 @@ jobs:
             ./test/**/TestResults/*
             
       - name: Archive Code coverage
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: codecoverage
@@ -75,10 +75,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
                 
       - name: dotnet tool restore
         run: dotnet tool restore
@@ -87,7 +87,7 @@ jobs:
         run: dotnet run --project ./build/build.fsproj -c Release -t "Stryker"
 
       - name: Archive Stryker results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: stryker.results
@@ -99,10 +99,10 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
                 
       - name: dotnet tool restore
         run: dotnet tool restore
@@ -111,7 +111,7 @@ jobs:
         run: dotnet run --project ./build/build.fsproj -c Release -t "Benchmarks"
 
       - name: Archive Benchmark results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: benchmarks.results
@@ -125,10 +125,10 @@ jobs:
     if: github.event_name == 'push'
         
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
 
       - name: dotnet tool restore
         run: dotnet tool restore
@@ -147,7 +147,7 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:    
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Create Release
         uses: ncipollo/release-action@v1
