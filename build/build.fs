@@ -152,7 +152,7 @@ let initTargets () =
             failwithf "reportgenerator failed!")
 
     Target.create "SCA" (fun _ ->
-        let args = "--no-restore --transitive"
+        let args = "scan --no-restore --transitive"
         let result = DotNet.exec id "pkgchk" args
 
         if not result.OK then
