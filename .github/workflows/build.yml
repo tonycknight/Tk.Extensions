@@ -109,11 +109,11 @@ jobs:
       - name: Restore tools
         run: dotnet tool restore
               
-      - name: Build
-        run: dotnet build -c Release
+      - name: Publish
+        run: dotnet publish ./test/Tk.Extensions.Benchmarks/Tk.Extensions.Benchmarks.csproj -c Release -o ./publish/
 
       - name: Run build
-        run: test/Tk.Extensions.Benchmarks/bin/Release/net8.0/Tk.Extensions.Benchmarks "-f Tk.*"
+        run: dotnet "./publish/Tk.Extensions.Benchmarks.dll" -f "*"
 
       - name: Archive Benchmark results
         uses: actions/upload-artifact@v4
