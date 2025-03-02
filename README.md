@@ -11,13 +11,8 @@ An eclectic mix of extension methods and other utilities.
 # Building
 
 ```
-build.ps1
-```
-
-or
-
-```
 dotnet tool restore
-dotnet run --project .\build\build.fsproj -c Release
+dotnet restore
+dotnet build
 ```
 

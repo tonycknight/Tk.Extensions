@@ -1,5 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -7,15 +7,13 @@
     <Authors>Tony Knight</Authors>
     <Copyright>Tony Knight 2022</Copyright>
     <Description>Some eclectic extensions</Description>
-    <PackageProjectUrl>https://github.com/tonycknight/Tk.Extensions</PackageProjectUrl>    
+    <PackageProjectUrl>https://github.com/tonycknight/Tk.Extensions</PackageProjectUrl>
     <LangVersion>latest</LangVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
-
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
-
   <ItemGroup>
-    <None Include="..\..\README.md" Link="README.md" pack="true" PackagePath="."/>
+    <None Include="..\..\README.md" Link="README.md" pack="true" PackagePath="." />
   </ItemGroup>
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

@@ -9,6 +9,7 @@ on:
 
 env:
   build-version-number: 0.1.${{ github.run_number }}  
+  package-version-number: 0.1.${{ github.run_number }}
    
 jobs:
   sca:
@@ -18,32 +19,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
                         
-      - name: dotnet tool restore
+      - name: Restore tools
         run: dotnet tool restore
               
-      - name: Run build
-        run: dotnet run --project ./build/build.fsproj -c Release -t "Consolidate code coverage"
+      - name: Run tests
+        run: dotnet test -c Debug --filter FullyQualifiedName!~integration /p:CollectCoverage=true /p:CoverletOutput=./TestResults/coverage.info /p:CoverletOutputFormat=cobertura --logger "trx;LogFileName=test_results.trx" 
+
+      - name: Consolidate code coverage
+        run: dotnet reportgenerator -reports:./test/**/coverage.info -targetdir:./reports/codecoverage -reporttypes:Html
 
       - name: Archive Test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: tests.results
           path: |
             ./test/**/TestResults/*
-            
-      - name: Archive Code coverage
-        uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: codecoverage
-          path: ./publish/codecoverage/*.*
-                    
+                                
       - name: Unit test results
         uses: dorny/test-reporter@v1
         if: always()
@@ -75,19 +72,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
                 
-      - name: dotnet tool restore
+      - name: Restore tools
         run: dotnet tool restore
               
       - name: Run build
-        run: dotnet run --project ./build/build.fsproj -c Release -t "Stryker"
+        run: dotnet dotnet-stryker
 
       - name: Archive Stryker results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: stryker.results
@@ -95,23 +92,25 @@ jobs:
             ./StrykerOutput/**/reports/* 
 
   benchmarks:    
-    # using Windows, as running ubuntu clears DLLs mid-way, causing aborts
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
                 
-      - name: dotnet tool restore
+      - name: Restore tools
         run: dotnet tool restore
               
+      - name: Publish
+        run: dotnet publish ./test/Tk.Extensions.Benchmarks/Tk.Extensions.Benchmarks.csproj -c Release -o ./publish/
+
       - name: Run build
-        run: dotnet run --project ./build/build.fsproj -c Release -t "Benchmarks"
+        run: dotnet "./publish/Tk.Extensions.Benchmarks.dll" -f "*"
 
       - name: Archive Benchmark results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: benchmarks.results
@@ -125,16 +124,24 @@ jobs:
     if: github.event_name == 'push'
         
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
 
-      - name: dotnet tool restore
+      - name: Restore tools
         run: dotnet tool restore
-                    
-      - name: Run build
-        run: dotnet run --project ./build/build.fsproj -c Release -t "Build"
+
+      - name: Restore solutiom
+        run: dotnet restore
+
+      - name: Set package version
+        if: github.ref != 'refs/heads/main' 
+        run: |
+          echo "package-version-number=${{ env.package-version-number }}-preview" >> $GITHUB_ENV
+      
+      - name: Package
+        run: dotnet pack -c Release -o ./package/ -p:PackageVersion=${{ env.package-version-number }}
 
       - name: Push nuget package
         if: github.event_name == 'push'
@@ -147,7 +154,7 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:    
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Create Release
         uses: ncipollo/release-action@v1

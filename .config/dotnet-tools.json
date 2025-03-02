@@ -3,28 +3,32 @@
   "isRoot": true,
   "tools": {
     "paket": {
-      "version": "8.0.0",
+      "version": "9.0.2",
       "commands": [
         "paket"
-      ]
+      ],
+      "rollForward": false
     },
     "dotnet-reportgenerator-globaltool": {
-      "version": "5.2.0",
+      "version": "5.4.4",
       "commands": [
         "reportgenerator"
-      ]
+      ],
+      "rollForward": false
     },
     "dotnet-stryker": {
-      "version": "3.13.1",
+      "version": "4.5.1",
       "commands": [
         "dotnet-stryker"
-      ]
+      ],
+      "rollForward": false
     },
     "pkgchk-cli": {
-      "version": "0.1.152",
+      "version": "0.3.402",
       "commands": [
         "pkgchk"
-      ]
+      ],
+      "rollForward": false
     }
   }
 }
