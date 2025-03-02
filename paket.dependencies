@@ -3,8 +3,8 @@ source https://api.nuget.org/v3/index.json
 storage: none
 framework: net8.0, netstandard2.1
 nuget BenchmarkDotNet
-nuget coverlet.collector 3.1.2
-nuget coverlet.msbuild 3.1.2
+nuget coverlet.collector
+nuget coverlet.msbuild
 nuget FluentAssertions
 nuget FsCheck.Xunit
 nuget Microsoft.NET.Test.Sdk 16.11.0
