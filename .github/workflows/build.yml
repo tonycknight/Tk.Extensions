@@ -26,8 +26,11 @@ jobs:
       - name: dotnet tool restore
         run: dotnet tool restore
               
-      - name: Run build
-        run: dotnet run --project ./build/build.fsproj -c Release -t "Consolidate code coverage"
+      - name: Run tests
+        run: dotnet test -c Debug --filter FullyQualifiedName!~integration /p:CollectCoverage=true /p:CoverletOutput=./TestResults/coverage.info /p:CoverletOutputFormat=cobertura --logger "trx;LogFileName=test_results.trx" 
+
+      - name: Consolidate code coverage
+        run: dotnet reportgenerator -reports:./test/**/coverage.info -targetdir:./reports/codecoverage -reporttypes:Html
 
       - name: Archive Test results
         uses: actions/upload-artifact@v4
