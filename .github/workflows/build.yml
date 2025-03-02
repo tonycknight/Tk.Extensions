@@ -98,8 +98,7 @@ jobs:
             ./StrykerOutput/**/reports/* 
 
   benchmarks:    
-    # using Windows, as running ubuntu clears DLLs mid-way, causing aborts
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
