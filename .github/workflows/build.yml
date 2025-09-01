@@ -144,7 +144,7 @@ jobs:
         run: dotnet pack -c Release -o ./package/ -p:PackageVersion=${{ env.package-version-number }}
 
       - name: Push nuget package
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: dotnet nuget push "package/*.nupkg"  --api-key ${{ secrets.NUGET_PAT }} --source "nuget.org"
 
   create-gh-release:
