@@ -2,31 +2,17 @@
   "version": 1,
   "isRoot": true,
   "tools": {
-    "paket": {
-      "version": "9.0.2",
-      "commands": [
-        "paket"
-      ],
-      "rollForward": false
-    },
     "dotnet-reportgenerator-globaltool": {
-      "version": "5.4.4",
+      "version": "5.4.12",
       "commands": [
         "reportgenerator"
       ],
       "rollForward": false
     },
     "dotnet-stryker": {
-      "version": "4.5.1",
+      "version": "4.8.1",
       "commands": [
         "dotnet-stryker"
-      ],
-      "rollForward": false
-    },
-    "pkgchk-cli": {
-      "version": "0.3.402",
-      "commands": [
-        "pkgchk"
       ],
       "rollForward": false
     }
