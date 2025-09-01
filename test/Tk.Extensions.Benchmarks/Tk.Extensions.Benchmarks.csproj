@@ -11,5 +11,7 @@
     <ProjectReference Include="..\..\src\Tk.Extensions\Tk.Extensions.csproj" />
   </ItemGroup>
 
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.15.2" />
+  </ItemGroup>
 </Project>
