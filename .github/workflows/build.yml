@@ -40,7 +40,7 @@ jobs:
         run: dotnet reportgenerator -reports:./test/**/coverage.info -targetdir:./reports/codecoverage -reporttypes:Html
 
       - name: Archive Test results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: tests.results
@@ -90,7 +90,7 @@ jobs:
         run: dotnet dotnet-stryker
 
       - name: Archive Stryker results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: stryker.results
@@ -116,7 +116,7 @@ jobs:
         run: dotnet "./publish/Tk.Extensions.Benchmarks.dll" -f "*"
 
       - name: Archive Benchmark results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: benchmarks.results
