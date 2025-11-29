@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v5
@@ -40,7 +40,7 @@ jobs:
         run: dotnet reportgenerator -reports:./test/**/coverage.info -targetdir:./reports/codecoverage -reporttypes:Html
 
       - name: Archive Test results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: tests.results
@@ -78,7 +78,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v5
@@ -90,7 +90,7 @@ jobs:
         run: dotnet dotnet-stryker
 
       - name: Archive Stryker results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: stryker.results
@@ -101,7 +101,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v5
@@ -116,7 +116,7 @@ jobs:
         run: dotnet "./publish/Tk.Extensions.Benchmarks.dll" -f "*"
 
       - name: Archive Benchmark results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: benchmarks.results
@@ -130,7 +130,7 @@ jobs:
     if: github.event_name == 'push'
         
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v5
@@ -160,7 +160,7 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:    
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Create Release
         uses: ncipollo/release-action@v1
