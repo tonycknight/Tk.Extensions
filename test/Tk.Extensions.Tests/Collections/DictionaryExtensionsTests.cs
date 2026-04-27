@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using FluentAssertions;
+using Shouldly;
 using Tk.Extensions.Collections;
 using Xunit;
 
@@ -13,9 +13,7 @@ namespace Tk.Extensions.Tests.Collections
         {
             Dictionary<string, string> d = null;
 
-            Action a = () => d.GetOrDefault("abc");
-
-            a.Should().Throw<ArgumentNullException>();
+            Should.Throw<ArgumentNullException>(() => d.GetOrDefault("abc"));
         }
 
         [Fact]
@@ -24,10 +22,8 @@ namespace Tk.Extensions.Tests.Collections
             var d = new Dictionary<string, string>();
 
 #pragma warning disable CS8714 // The type cannot be used as type parameter in the generic type or method. Nullability of type argument doesn't match 'notnull' constraint.
-            Action a = () => d.GetOrDefault(null);
+            Should.Throw<ArgumentNullException>(() => d.GetOrDefault(null));
 #pragma warning restore CS8714 // The type cannot be used as type parameter in the generic type or method. Nullability of type argument doesn't match 'notnull' constraint.
-
-            a.Should().Throw<ArgumentNullException>();
         }
 
         [Theory]
@@ -46,11 +42,11 @@ namespace Tk.Extensions.Tests.Collections
 
             if (key == testKey)
             {
-                r.Should().Be(keyValue);
+                r.ShouldBe(keyValue);
             }
             else
             {
-                r.Should().Be(default);
+                r.ShouldBe(default);
             }
         }
 
@@ -68,7 +64,7 @@ namespace Tk.Extensions.Tests.Collections
 
             var r = d.GetOrDefault(testKey);
 
-            r.Should().Be(default);
+            r.ShouldBe(default);
         }
     }
 }

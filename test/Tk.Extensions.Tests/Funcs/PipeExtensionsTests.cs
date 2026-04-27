@@ -1,5 +1,5 @@
 ﻿using System;
-using FluentAssertions;
+using Shouldly;
 using Tk.Extensions.Funcs;
 using Xunit;
 
@@ -12,9 +12,7 @@ namespace Tk.Extensions.Tests.Funcs
         {
             Func<int, string> f = null;
 
-            Action a = () => 1.Pipe(f);
-
-            a.Should().Throw<ArgumentNullException>();
+            Should.Throw<ArgumentNullException>(() => 1.Pipe(f));
         }
 
         [Fact]
@@ -24,7 +22,7 @@ namespace Tk.Extensions.Tests.Funcs
 
             var r = s.Pipe(x => x != null ? 1 : 0);
 
-            r.Should().Be(0);
+            r.ShouldBe(0);
         }
 
         [Theory]
@@ -35,7 +33,7 @@ namespace Tk.Extensions.Tests.Funcs
             var r = x.Pipe(i => i * 2)
                       .Pipe(i => i.ToString());
 
-            r.Should().Be(expected);
+            r.ShouldBe(expected);
         }
     }
 }

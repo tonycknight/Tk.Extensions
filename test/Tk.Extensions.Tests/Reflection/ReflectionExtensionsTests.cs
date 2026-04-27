@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using FluentAssertions;
+using Shouldly;
 using Tk.Extensions.Reflection;
 using Xunit;
 
@@ -12,9 +12,9 @@ namespace Tk.Extensions.Tests.Reflection
         {
             var attrs = (new Tk.Extensions.Time.TimeProvider()).GetAssemblyCustomAttributes().ToList();
 
-            attrs.Should().NotBeEmpty();
+            attrs.ShouldNotBeEmpty();
             var prodAttr = attrs.Where(a => a is System.Reflection.AssemblyProductAttribute).FirstOrDefault();
-            prodAttr.Should().NotBeNull();
+            prodAttr.ShouldNotBeNull();
         }
 
         [Fact]
@@ -24,7 +24,7 @@ namespace Tk.Extensions.Tests.Reflection
 
             var val = attrs.GetAttributeValue<System.Reflection.AssemblyProductAttribute, string>(a => a.Product);
 
-            val.Should().NotBeNullOrWhiteSpace();
+            val.ShouldNotBeNullOrWhiteSpace();
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace Tk.Extensions.Tests.Reflection
             var val = attrs.GetAttributeValue<Newtonsoft.Json.JsonPropertyAttribute, string>(a => a.PropertyName);
 #pragma warning restore CS8603 // Possible null reference return.
 
-            val.Should().BeNull();
+            val.ShouldBeNull();
         }
     }
 }

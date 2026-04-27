@@ -1,5 +1,5 @@
 ﻿using System;
-using FluentAssertions;
+using Shouldly;
 using Tk.Extensions.Time;
 using Xunit;
 
@@ -21,7 +21,7 @@ namespace Tk.Extensions.Tests.Time
             var expected = now.AddHours(utcOffset);
             var r = now.ToUkDateTime();
 
-            r.Should().Be(expected);
+            r.ShouldBe(expected);
         }
     }
 }
