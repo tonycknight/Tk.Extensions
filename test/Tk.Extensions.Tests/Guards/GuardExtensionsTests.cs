@@ -1,5 +1,5 @@
 ﻿using System;
-using FluentAssertions;
+using Shouldly;
 using Tk.Extensions.Guards;
 using Xunit;
 
@@ -12,9 +12,8 @@ namespace Tk.Extensions.Tests.Guards
         {
             string s = null;
 
-            Action a = () => s.ArgNotNull(nameof(s));
-
-            a.Should().Throw<ArgumentNullException>().WithParameterName(nameof(s));
+            var ex = Should.Throw<ArgumentNullException>(() => s.ArgNotNull(nameof(s)));
+            ex.ParamName.ShouldBe(nameof(s));
         }
 
         [Fact]
@@ -23,7 +22,7 @@ namespace Tk.Extensions.Tests.Guards
             var s = "abc";
             var r = s.ArgNotNull(nameof(s));
 
-            r.Should().Be(s);
+            r.ShouldBe(s);
         }
 
         [Fact]
@@ -31,17 +30,13 @@ namespace Tk.Extensions.Tests.Guards
         {
             string s = null;
 
-            Action a = () => s.InvalidOpArg(x => false, "Invalid");
-
-            a.Should().Throw<InvalidOperationException>().WithMessage("?*");
+            Should.Throw<InvalidOperationException>(() => s.InvalidOpArg(x => false, "Invalid"));
         }
 
         [Fact]
         public void InvalidOpArg_NullPredicate_ThrowsException()
         {
-            Action a = () => 1.InvalidOpArg(null, "invalid");
-
-            a.Should().Throw<ArgumentNullException>().WithMessage("?*");
+            Should.Throw<ArgumentNullException>(() => 1.InvalidOpArg(null, "invalid"));
         }
 
         [Fact]
@@ -50,7 +45,7 @@ namespace Tk.Extensions.Tests.Guards
             var value = 1234;
             var r = value.InvalidOpArg(x => false, "invalid");
 
-            r.Should().Be(value);
+            r.ShouldBe(value);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using FluentAssertions;
+using Shouldly;
 using Tk.Extensions.Linq;
 using Xunit;
 
@@ -15,7 +15,7 @@ namespace Tk.Extensions.Tests.Linq
 
             var r = xs.NullToEmpty();
 
-            r.Should().BeEquivalentTo(new string[0]);
+            r.ShouldBe(new string[0]);
         }
 
         [Fact]
@@ -25,7 +25,7 @@ namespace Tk.Extensions.Tests.Linq
 
             var r = xs.NullToEmpty();
 
-            r.Should().BeEquivalentTo(new string[0]);
+            r.ShouldBe(new string[0]);
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace Tk.Extensions.Tests.Linq
 
             var r = xs.NullToEmpty();
 
-            r.Should().BeEquivalentTo(xs);
+            r.ShouldBe(xs);
         }
 
         [Theory]
@@ -49,7 +49,7 @@ namespace Tk.Extensions.Tests.Linq
 
             var expected = new[] { value };
 
-            r.Should().BeEquivalentTo(expected);
+            r.ShouldBe(expected);
         }
 
         [Fact]
@@ -57,7 +57,7 @@ namespace Tk.Extensions.Tests.Linq
         {
             var result = Enumerable.Empty<int>().SelectFlat(x => x.Singleton()).ToList();
 
-            result.Should().BeEmpty();
+            result.ShouldBeEmpty();
         }
 
         [Theory]
@@ -69,7 +69,7 @@ namespace Tk.Extensions.Tests.Linq
 
             var result = values.SelectFlat(x => Enumerable.Empty<int>()).ToList();
 
-            result.Should().BeEquivalentTo(values);
+            result.ShouldBe(values);
         }
 
         [Theory]
@@ -85,7 +85,7 @@ namespace Tk.Extensions.Tests.Linq
                            .ToList();
             var expected = Enumerable.Range(1, limit).ToList();
 
-            result.Should().BeEquivalentTo(expected);
+            result.ShouldBe(expected);
         }
 
         [Theory]
@@ -104,7 +104,7 @@ namespace Tk.Extensions.Tests.Linq
 
             var sum = ys.Sum();
 
-            sum.Should().Be(expected);
+            sum.ShouldBe(expected);
         }
 
         [Theory]
@@ -120,7 +120,7 @@ namespace Tk.Extensions.Tests.Linq
 
             var result = xs.ToInfinite().Take(size * count).ToList();
 
-            result.Should().BeEquivalentTo(sequence);
+            result.ShouldBe(sequence);
         }
 
     }

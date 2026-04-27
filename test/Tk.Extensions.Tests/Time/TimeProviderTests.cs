@@ -1,5 +1,5 @@
 ﻿using System;
-using FluentAssertions;
+using Shouldly;
 using Tk.Extensions.Time;
 using Xunit;
 using TimeProvider = Tk.Extensions.Time.TimeProvider;
@@ -15,7 +15,7 @@ namespace Tk.Extensions.Tests.Time
 
             var r = tp.UtcNow();
 
-            r.Kind.Should().Be(DateTimeKind.Utc);
+            r.Kind.ShouldBe(DateTimeKind.Utc);
         }
 
         [Fact]
@@ -26,7 +26,7 @@ namespace Tk.Extensions.Tests.Time
 
             var r = tp.UtcNow();
 
-            r.Should().BeCloseTo(now, TimeSpan.FromSeconds(1));
+            Math.Abs((r - now).TotalSeconds).ShouldBeLessThanOrEqualTo(1);
         }
 
     }

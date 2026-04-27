@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using FluentAssertions;
+using Shouldly;
 using Xunit;
 
 namespace Tk.Extensions.Tests
@@ -12,9 +12,7 @@ namespace Tk.Extensions.Tests
         {
             string[] xs = null;
 
-            Action a = () => xs.Join(",");
-
-            a.Should().Throw<ArgumentNullException>().WithMessage("?*");
+            Should.Throw<ArgumentNullException>(() => xs.Join(","));
         }
 
         [Fact]
@@ -24,7 +22,7 @@ namespace Tk.Extensions.Tests
 
             var r = xs.Join(" ");
 
-            r.Should().BeEmpty();
+            r.ShouldBeEmpty();
         }
 
         [Theory]
@@ -42,7 +40,7 @@ namespace Tk.Extensions.Tests
 
             var expected = new String(cs);
 
-            r.Should().Be(expected);
+            r.ShouldBe(expected);
         }
 
         [Theory]
@@ -60,7 +58,7 @@ namespace Tk.Extensions.Tests
 
             var expected = new String(d, count - 1);
 
-            r.Should().Be(expected);
+            r.ShouldBe(expected);
         }
 
         [Theory]
@@ -71,7 +69,7 @@ namespace Tk.Extensions.Tests
         {
             var r = value.Format(format);
 
-            r.Should().Be(string.Format(format, value));
+            r.ShouldBe(string.Format(format, value));
         }
 
         [Theory]
@@ -88,7 +86,7 @@ namespace Tk.Extensions.Tests
         {
             var r = value.TrimEnd(end);
 
-            r.Should().Be(expected);
+            r.ShouldBe(expected);
         }
 
         [Theory]
@@ -102,7 +100,7 @@ namespace Tk.Extensions.Tests
         {
             var result = value.Repeat(len);
 
-            result.Should().Be(expected);
+            result.ShouldBe(expected);
         }
 
         [Theory]
@@ -110,9 +108,7 @@ namespace Tk.Extensions.Tests
         [InlineData("", null)]
         public void GetLevenshteinDistance_NullValues_ExceptionThrown(string? value, string? comparand)
         {
-            Func<int> distance = () => value.GetLevenshteinDistance(comparand);
-
-            distance.Should().Throw<ArgumentNullException>();
+            Should.Throw<ArgumentNullException>(() => value.GetLevenshteinDistance(comparand));
         }
 
         [Theory]
@@ -120,9 +116,7 @@ namespace Tk.Extensions.Tests
         [InlineData("", null)]
         public void GetLevenshteinDistance_NullComparerValues_ExceptionThrown(string? value, string? comparand)
         {
-            Func<int> distance = () => value.GetLevenshteinDistance(comparand, true);
-
-            distance.Should().Throw<ArgumentNullException>();
+            Should.Throw<ArgumentNullException>(() => value.GetLevenshteinDistance(comparand, true));
         }
 
         [Theory]
@@ -147,7 +141,7 @@ namespace Tk.Extensions.Tests
         {
             var r = value.GetLevenshteinDistance(comparand);
 
-            r.Should().Be(expected);
+            r.ShouldBe(expected);
         }
 
         [Theory]
@@ -167,7 +161,7 @@ namespace Tk.Extensions.Tests
         {
             var r = value.GetLevenshteinDistance(comparand, true);
 
-            r.Should().Be(expected);
+            r.ShouldBe(expected);
         }
 
         [Theory]
@@ -175,9 +169,7 @@ namespace Tk.Extensions.Tests
         [InlineData("", null)]
         public void GetDamerauLevenshteinDistance_NullValues_ExceptionThrown(string? value, string? comparand)
         {
-            Func<int> distance = () => value.GetDamerauLevenshteinDistance(comparand);
-
-            distance.Should().Throw<ArgumentNullException>();
+            Should.Throw<ArgumentNullException>(() => value.GetDamerauLevenshteinDistance(comparand));
         }
 
         [Theory]
@@ -185,9 +177,7 @@ namespace Tk.Extensions.Tests
         [InlineData("", null)]
         public void GetDamerauLevenshteinDistance_NullComparerValues_ExceptionThrown(string? value, string? comparand)
         {
-            Func<int> distance = () => value.GetDamerauLevenshteinDistance(comparand, true);
-
-            distance.Should().Throw<ArgumentNullException>();
+            Should.Throw<ArgumentNullException>(() => value.GetDamerauLevenshteinDistance(comparand, true));
         }
 
         [Theory]
@@ -212,7 +202,7 @@ namespace Tk.Extensions.Tests
         {
             var r = value.GetDamerauLevenshteinDistance(comparand);
 
-            r.Should().Be(expected);
+            r.ShouldBe(expected);
         }
 
         [Theory]
@@ -232,7 +222,7 @@ namespace Tk.Extensions.Tests
         {
             var r = value.GetDamerauLevenshteinDistance(comparand, true);
 
-            r.Should().Be(expected);
+            r.ShouldBe(expected);
         }
 
     }

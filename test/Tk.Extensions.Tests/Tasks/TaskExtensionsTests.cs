@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using FluentAssertions;
+using Shouldly;
 using Tk.Extensions.Tasks;
 using Xunit;
 
@@ -18,7 +18,7 @@ namespace Tk.Extensions.Tests.Tasks
 
             var r2 = await r;
 
-            r2.Should().Be(value);
+            r2.ShouldBe(value);
         }
     }
 }
