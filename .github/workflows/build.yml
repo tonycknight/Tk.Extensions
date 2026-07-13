@@ -11,8 +11,6 @@ on:
   push:
     branches: [ "**" ]
     tags: [ "**" ]   
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 env:
