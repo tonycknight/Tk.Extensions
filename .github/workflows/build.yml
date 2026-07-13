@@ -9,8 +9,8 @@ permissions:
 
 on:
   push:
-  pull_request:
-    branches: [ main ]
+    branches: [ "**" ]
+    tags: [ "**" ]   
   workflow_dispatch:
 
 env:
@@ -127,7 +127,7 @@ jobs:
     name: release to nuget
     runs-on: ubuntu-latest
     needs:   [ tests, codeql, sca, stryker, benchmarks ]
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
         
     steps:
       - uses: actions/checkout@v7
@@ -135,36 +135,21 @@ jobs:
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v5
 
+      - name: Determine version
+        run: echo "package-version-number=$(git describe --tags --dirty)" >> $GITHUB_ENV
+
+      - name: Report version
+        run: echo "Building package ${{ env.package-version-number }}" >> $GITHUB_STEP_SUMMARY
+
       - name: Restore tools
         run: dotnet tool restore
 
       - name: Restore solutiom
         run: dotnet restore
 
-      - name: Set package version
-        if: github.ref != 'refs/heads/main' 
-        run: |
-          echo "package-version-number=${{ env.package-version-number }}-preview" >> $GITHUB_ENV
-      
-      - name: Package
-        run: dotnet pack -c Release -o ./package/ -p:PackageVersion=${{ env.package-version-number }}
+      - name: Build package 
+        run: dotnet pack -c Release -o ./package/ -p:PackageVersion=${{ env.package-version-number }} -p:Version=${{ env.package-version-number }} /p:ContinuousIntegrationBuild=true
 
       - name: Push nuget package
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: dotnet nuget push "package/*.nupkg"  --api-key ${{ secrets.NUGET_PAT }} --source "nuget.org"
 
-  create-gh-release:
-    name: create gh release
-    runs-on: ubuntu-latest
-    needs: [ release-to-nuget ]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-
-    steps:    
-      - uses: actions/checkout@v7
-
-      - name: Create Release
-        uses: ncipollo/release-action@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag: v${{ env.build-version-number }}
-          generateReleaseNotes: true
