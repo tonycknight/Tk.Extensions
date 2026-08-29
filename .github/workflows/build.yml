@@ -79,7 +79,7 @@ jobs:
         run: dotnet tool restore
               
       - name: Run build
-        run: dotnet dotnet-stryker
+        run: dotnet dotnet-stryker -t mtp
 
       - name: Archive Stryker results
         uses: actions/upload-artifact@v7
