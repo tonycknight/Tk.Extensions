@@ -34,25 +34,17 @@ jobs:
         run: dotnet tool restore
               
       - name: Run tests
-        run: dotnet test -c Debug --filter FullyQualifiedName!~integration /p:CollectCoverage=true /p:CoverletOutput=./TestResults/coverage.info /p:CoverletOutputFormat=cobertura --logger "trx;LogFileName=test_results.trx" 
+        run: dotnet test -c Debug -- --coverage --coverage-output-format cobertura --report-trx
 
       - name: Consolidate code coverage
-        run: dotnet reportgenerator -reports:./test/**/coverage.info -targetdir:./reports/codecoverage -reporttypes:Html
-
-      - name: Archive Test results
-        uses: actions/upload-artifact@v7
-        if: always()
-        with:
-          name: tests.results
-          path: |
-            ./test/**/TestResults/*
-                                
+        run: dotnet reportgenerator -reports:./TestResults/*.cobertura.xml -targetdir:./publish/codecoverage -reporttypes:Html  
+      
       - name: Unit test results
         uses: dorny/test-reporter@v3
         if: always()
         with:
           name: unit test results
-          path: ${{ github.workspace }}/test/Tk.Extensions.Tests/TestResults/test_results.trx
+          path: ${{ github.workspace }}/TestResults/*.trx
           reporter: dotnet-trx
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -60,7 +52,7 @@ jobs:
         uses: 5monkeys/cobertura-action@master
         if: always()
         with:
-          path: ${{ github.workspace }}/test/Tk.Extensions.Tests/TestResults/coverage.info
+          path: ${{ github.workspace }}/TestResults/*.cobertura.xml
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           minimum_coverage: 90
           fail_below_threshold: true
